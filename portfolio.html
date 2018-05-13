@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Manvi Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <section class="container">
+        <header class="header row">
+            <div class="header__inner">
+                <img class="header__logo col-sm" src="images/logo1.jpg" alt="Manvi Gupta Portfolio Site">
+                <div class="header__title col-sm">
+                    <h1>Manvi Gupta</h1>
+                    <h3>FrontEnd Developer</h3>
+                </div>
+            </div>
+        </header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#myprojects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contactMe">Contact Me</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content row" id="home">
+            <img src="images/body_image_medium.jpg" srcset="images/body_image_small.jpg 700w, images/body_image_medium.jpg 1000w, images/body_image_large.jpg 1300w" sizes="(max-width: 550px) 100vw, (max-width: 768px) 100vw" alt="My Portfolio image">
+        </div>
+        <div class="row work">
+            <h2 class="col-12">Featured Work</h2>
+        </div>
+        <div class="row projects" id="myprojects">
+            <div class="project col-sm">
+                <div class="card1">
+                    <a href="http://github.com" target="_blank">
+                        <img src="images/project1_small.jpg" srcset="images/project1_small.jpg 1000w,
+                        images/project1_medium.jpg 700w"  alt="Project1"> 
+			        </a>
+                    <h2 class="project-name">Project One</h2>
+                    <a class="project-link" href="https://github.com" target="_blank">https://github.com</a>
+                </div>
+            </div>
+            <div class="project col-sm">
+                <div class="card1">
+                    <a href="http://github.com" target="_blank">
+				        <img src="images/project2_small.jpg" srcset="images/project2_small.jpg 1000w,
+                        images/project2_medium.jpg 700w" alt="Project2"> 
+			        </a>
+                    <h2 class="project-name">Project Two</h2>
+                    <a class="project-link" href="https://github.com" target="_blank">https://github.com</a>
+                </div>
+            </div>
+            <div class="project col-sm">
+                <div class="card1">
+                    <a href="http://github.com" target="_blank">
+				        <img src="images/project1_small.jpg" srcset="images/project1_small.jpg 1000w,
+                    images/project1_medium.jpg 700w" alt="Project1"> 
+			        </a>
+                    <h2 class="project-name">Project Three</h2>
+                    <a class="project-link" href="https://github.com" target="_blank">https://github.com</a>
+                </div>
+            </div>
+        </div>
+        <footer id="contactMe">
+            <div class="social">
+                <ul class="social-list">
+                    <li>
+                        <a class="social-icons" href="https://github.com/manvigupta1987" target="_blank">
+  					<i class="fa fa-github-square fa-2x" aria-hidden="true"></i>
+  				</a>
+                    </li>
+                    <li>
+                        <a class="social-icons" href="https://www.linkedin.com/in/manvi-gupta/" target="_blank">
+  					<i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+  				</a>
+                    </li>
+                    <li>
+                        <a class="social-icons" href="https://twitter.com/manvi2187" target="_blank">
+  					<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+  				</a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+    </section>
+    <script>
+    $('a[href*=\\#]').on('click', function(event){
+    event.preventDefault();
+    $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+	});
+    </script>
+</body>
+
+</html>
