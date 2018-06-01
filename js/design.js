@@ -11,10 +11,6 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function clearGrid() {
-    // let rowCount = table.rows.length;
-    // for (let row = 0; row < rowCount; row++) {
-    //     table.deleteRow(0);
-    // }
     while(table.firstChild){
         table.removeChild(table.firstChild);
     }
@@ -26,13 +22,11 @@ function makeGrid() {
     let width = document.querySelector("#inputWidth").value;
     //table.appendChild(tableBody);
     for (let rows = 0; rows < height; rows++) {
-        let tr = document.createElement('tr');
+        let tr = table.insertRow(0);
         tr.className = "row";
-        table.appendChild(tr);
         for (let col = 0; col < width; col++) {
-            let td = document.createElement('td');
+            let td = tr.insertCell(col);
             td.className = "col";
-            tr.appendChild(td);
         }
         tr.addEventListener('click', changeColor);
     }
