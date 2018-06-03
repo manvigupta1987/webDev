@@ -1,18 +1,50 @@
-/*
- * Create a list that holds all of your cards
- */
+let cardList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor", "fa-leaf", "fa-bicycle", "fa-diamond", "fa-bomb", "fa-leaf", "fa-bomb", "fa-bolt", "fa-bicycle", "fa-paper-plane-o", "fa-cube"];
+
+const cards = document.querySelectorAll('.card');
+let openCards = [];
+let matchCards = [];
+
+document.addEventListener('DOMContentLoaded', function () {
+    /*this function creates a card of list and add listener on each card*/
+    cardList = shuffle(cardList);
+    addListenerOnCards();
+});
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+/* Set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
  */
+function addListenerOnCards() {
+    let itemCount =0;
+    cards.forEach(function (elem) {
+        //let faIcon = elem.innerHTML;
+        //cardList.push(findCardName(faIcon));
+        elem.firstElementChild.className = "";
+        elem.firstElementChild.className= "fa " + cardList[itemCount];
+        itemCount++;
+        elem.addEventListener('click', flipCard);
+    });
+}
+
+function flipCard(event) {
+    if (event.target.className == "card") {
+        this.className += " open show";
+        openCards.push(findCardName(this.innerHTML));
+    }
+}
+
+function findCardName(faIcon) {
+    let m = faIcon.match(/fa-.*\"/);
+    if (m && m[0]) {
+        m[0] = m[0].substring(0, m[0].length - 1);
+        return m[0];
+    }
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -21,7 +53,6 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
