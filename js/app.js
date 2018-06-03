@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* Set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - Shuffle the card and create html for the card. 
  */
 function addListenerOnCards() {
     let itemCount =0;
@@ -30,6 +31,41 @@ function flipCard(event) {
     if (event.target.className == "card") {
         this.className += " open show";
         openCards.push(findCardName(this.innerHTML));
+        if (openCards.length === 2) {
+            setTimeout(checkIfCardsMatch, 300);
+        }
+    }
+}
+
+/* Function to check if cards are matched. 
+ * if cards are matched, add class match and show to the card.
+ * if cards are not matched, remove open and show class from the card.
+ */
+function checkIfCardsMatch() {
+    if (openCards[0] === openCards[1]) {
+        cardsMatched();
+    } else {
+        cardsNotMatched();
+    }
+    openCards = [];
+}
+
+function cardsMatched() {
+    let cardName = openCards[0];
+    const matchedCards = document.getElementsByClassName(cardName);
+    for (let card of matchedCards) {
+        card.parentElement.classList.remove("open");
+        card.parentElement.classList.add("match");
+    }
+}
+
+function cardsNotMatched() {
+    for (let i = 0; i < openCards.length; i++) {
+        let cards = document.getElementsByClassName(openCards[i]);
+        for (let card of cards) {
+            card.parentElement.classList.remove("open");
+            card.parentElement.classList.remove("show");
+        }
     }
 }
 
