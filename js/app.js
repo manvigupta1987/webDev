@@ -1,8 +1,11 @@
 let cardList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor", "fa-leaf", "fa-bicycle", "fa-diamond", "fa-bomb", "fa-leaf", "fa-bomb", "fa-bolt", "fa-bicycle", "fa-paper-plane-o", "fa-cube"];
 
 const cards = document.querySelectorAll('.card');
+let movesText = document.querySelector('.moves');
 let openCards = [];
 let matchCards = [];
+let moves = 0;
+
 
 document.addEventListener('DOMContentLoaded', function () {
     /*this function creates a card of list and add listener on each card*/
@@ -30,8 +33,11 @@ function addListenerOnCards() {
 function flipCard(event) {
     if (event.target.className == "card") {
         this.className += " open show";
+        movesText.textContent = moves;
         openCards.push(findCardName(this.innerHTML));
         if (openCards.length === 2) {
+            moves += 1;
+            movesText.textContent = moves;
             setTimeout(checkIfCardsMatch, 300);
         }
     }
