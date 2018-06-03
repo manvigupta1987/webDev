@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     /*this function creates a card of list and add listener on each card*/
     cardList = shuffle(cardList);
     addListenerOnCards();
+    document.querySelector('.fa-repeat').addEventListener('click', refresh);
 });
 
 
@@ -96,6 +97,22 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
+}
+
+function refresh(){
+    moves =0;
+    movesText.textContent = moves;
+    resetDeck();
+    cardList = shuffle(cardList);
+    addListenerOnCards();
+    openCards = [];
+}
+
+
+function resetDeck(){
+    cards.forEach(function(elem){
+        elem.className = "" + "card";
+    });
 }
 
 
