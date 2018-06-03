@@ -5,6 +5,9 @@ let movesText = document.querySelector('.moves');
 let openCards = [];
 let matchCards = [];
 let moves = 0;
+let countTimer = 0;
+let timerPtr =0;
+let isGameStarted = false;
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -27,21 +30,34 @@ function addListenerOnCards() {
         elem.firstElementChild.className = "";
         elem.firstElementChild.className= "fa " + cardList[itemCount];
         itemCount++;
-        elem.addEventListener('click', flipCard);
+        elem.addEventListener('click', cardClicked);
     });
 }
 
-function flipCard(event) {
+function cardClicked(event) {
     if (event.target.className == "card") {
         this.className += " open show";
+        
+        if(!isGameStarted){
+            isGameStarted = true;
+            countTimer =0;
+            timerPtr = setTimeout(startTimer, 1000);
+        }
+        
         movesText.textContent = moves;
         openCards.push(this);
         if (openCards.length === 2) {
             moves += 1;
             movesText.textContent = moves;
-            setTimeout(checkIfCardsMatch, 300);
+            checkIfCardsMatch();
         }
     }
+}
+
+function startTimer(){
+    countTimer += 1;
+    document.querySelector('.timer').textContent = countTimer;
+    timerPtr = setTimeout(startTimer, 1000);
 }
 
 function getClassName(card){
@@ -106,12 +122,18 @@ function shuffle(array) {
 function refresh(){
     moves =0;
     movesText.textContent = moves;
+    resetTimer();
     resetDeck();
     cardList = shuffle(cardList);
     addListenerOnCards();
     openCards = [];
 }
 
+function resetTimer(){
+    countTimer = 0;
+    clearTimeout(timerPtr);
+    document.querySelector('.timer').textContent = countTimer;
+}
 
 function resetDeck(){
     cards.forEach(function(elem){
