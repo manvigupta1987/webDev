@@ -35,7 +35,7 @@ function flipCard(event) {
     if (event.target.className == "card") {
         this.className += " open show";
         movesText.textContent = moves;
-        openCards.push(findCardName(this.innerHTML));
+        openCards.push(this);
         if (openCards.length === 2) {
             moves += 1;
             movesText.textContent = moves;
@@ -44,12 +44,16 @@ function flipCard(event) {
     }
 }
 
+function getClassName(card){
+    return (card.firstElementChild.className);
+    
+}
 /* Function to check if cards are matched. 
  * if cards are matched, add class match and show to the card.
  * if cards are not matched, remove open and show class from the card.
  */
 function checkIfCardsMatch() {
-    if (openCards[0] === openCards[1]) {
+    if (getClassName(openCards[0]) === getClassName(openCards[1])) {
         cardsMatched();
     } else {
         cardsNotMatched();
@@ -58,22 +62,22 @@ function checkIfCardsMatch() {
 }
 
 function cardsMatched() {
-    let cardName = openCards[0];
-    const matchedCards = document.getElementsByClassName(cardName);
-    for (let card of matchedCards) {
-        card.parentElement.classList.remove("open");
-        card.parentElement.classList.add("match");
-    }
+    openCards.forEach(function(card){
+        card.className = "card match";
+    });
 }
 
 function cardsNotMatched() {
-    for (let i = 0; i < openCards.length; i++) {
-        let cards = document.getElementsByClassName(openCards[i]);
-        for (let card of cards) {
-            card.parentElement.classList.remove("open");
-            card.parentElement.classList.remove("show");
-        }
-    }
+    openCards.forEach(function(card){
+        card.className += " notMatch";
+    });
+    setTimeout(resetClass, 500);
+}
+
+function resetClass(){
+     document.querySelectorAll(".notMatch").forEach(function(elem){
+         elem.className = "card";
+     });
 }
 
 function findCardName(faIcon) {
