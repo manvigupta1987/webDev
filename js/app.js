@@ -3,12 +3,16 @@ let cardList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cu
 const cards = document.querySelectorAll('.card');
 let movesText = document.querySelector('.moves');
 let openCards = [];
-let moves = 0;
+let movesCount = 0;
 let countTimer = 0;
-let timerPtr =0;
+let timerPtr = 0;
 let isGameStarted = false;
 let matchedCardCounter = 0;
 const GAME_FINISHED_COUNTER = 8;
+let MOVES_TO_LOOSE_STAR = 5;
+const NUMBER_OF_STARS = 3;
+let CARD_TO_LOOSE_STAR = 1;
+const MAX_MOVES = 30;
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -24,12 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
  *  - Shuffle the card and create html for the card. 
  */
 function addListenerOnCards() {
-    let itemCount =0;
+    let itemCount = 0;
     cards.forEach(function (elem) {
         //let faIcon = elem.innerHTML;
         //cardList.push(findCardName(faIcon));
         elem.firstElementChild.className = "";
-        elem.firstElementChild.className= "fa " + cardList[itemCount];
+        elem.firstElementChild.className = "fa " + cardList[itemCount];
         itemCount++;
         elem.addEventListener('click', cardClicked);
     });
@@ -37,43 +41,41 @@ function addListenerOnCards() {
 
 function cardClicked(event) {
     if (event.target.className == "card") {
-        if(checkIfGameFinished()){
+        if (checkIfGameFinished()) {
             return;
         }
         this.className += " open show";
-        if(!isGameStarted){
+        if (!isGameStarted) {
             isGameStarted = true;
-            countTimer =0;
+            countTimer = 0;
             timerPtr = setTimeout(startTimer, 1000);
+            updateMoves();
         }
-        
-        movesText.textContent = moves;
         openCards.push(this);
         if (openCards.length === 2) {
-            moves += 1;
-            movesText.textContent = moves;
+            movesCount += 1;
             checkIfCardsMatch();
         }
     }
 }
 
-function checkIfGameFinished(){
-    if(matchedCardCounter == GAME_FINISHED_COUNTER){
+function checkIfGameFinished() {
+    if (matchedCardCounter == GAME_FINISHED_COUNTER) {
         alert("You won the game");
         openCards = [];
-        
+
     }
 }
 
-function startTimer(){
+function startTimer() {
     countTimer += 1;
     document.querySelector('.timer').textContent = countTimer;
     timerPtr = setTimeout(startTimer, 1000);
 }
 
-function getClassName(card){
+function getClassName(card) {
     return (card.firstElementChild.className);
-    
+
 }
 /* Function to check if cards are matched. 
  * if cards are matched, add class match and show to the card.
@@ -86,26 +88,27 @@ function checkIfCardsMatch() {
     } else {
         cardsNotMatched();
     }
+    updateMoves();
     openCards = [];
 }
 
 function cardsMatched() {
-    openCards.forEach(function(card){
+    openCards.forEach(function (card) {
         card.className = "card match";
     });
 }
 
 function cardsNotMatched() {
-    openCards.forEach(function(card){
+    openCards.forEach(function (card) {
         card.className += " notMatch";
     });
     setTimeout(resetClass, 500);
 }
 
-function resetClass(){
-     document.querySelectorAll(".notMatch").forEach(function(elem){
-         elem.className = "card";
-     });
+function resetClass() {
+    document.querySelectorAll(".notMatch").forEach(function (elem) {
+        elem.className = "card";
+    });
 }
 
 function findCardName(faIcon) {
@@ -131,24 +134,56 @@ function shuffle(array) {
     return array;
 }
 
-function refresh(){
-    moves =0;
-    movesText.textContent = moves;
+function updateMoves() {
+    movesText.textContent = movesCount;
+    loseStar();
+}
+
+function loseStar() {
+    if(movesCount === MOVES_TO_LOOSE_STAR && MOVES_TO_LOOSE_STAR <=MAX_MOVES){
+        if(matchedCardCounter < CARD_TO_LOOSE_STAR ){
+         let starIcon = document.querySelector('.fa-star-half-o');
+        if(starIcon){
+            starIcon.className = "fa fa-star-o";
+        }else{
+            let starsIcon = document.querySelectorAll('.fa-star');
+            starIcon = starsIcon[starsIcon.length-1];
+            starIcon.className = "fa fa-star-half-o";
+        }
+        }
+        MOVES_TO_LOOSE_STAR +=5;
+        if((CARD_TO_LOOSE_STAR+2) < 8){
+            CARD_TO_LOOSE_STAR = CARD_TO_LOOSE_STAR + 2;
+        }else{
+            CARD_TO_LOOSE_STAR = 8;
+        }
+    }
+}
+
+function refresh() {
+    movesCount = 0;
+    updateMoves();
     resetTimer();
     resetDeck();
     cardList = shuffle(cardList);
     addListenerOnCards();
+    resetStars();
     openCards = [];
 }
 
-function resetTimer(){
+function resetTimer() {
     countTimer = 0;
     clearTimeout(timerPtr);
     document.querySelector('.timer').textContent = countTimer;
 }
 
-function resetDeck(){
-    cards.forEach(function(elem){
+function resetStars(){
+    document.querySelectorAll('.stars li').forEach(function(e){
+        e.firstElementChild.className = "fa fa-star";
+    });
+}
+function resetDeck() {
+    cards.forEach(function (elem) {
         elem.className = "" + "card";
     });
 }
