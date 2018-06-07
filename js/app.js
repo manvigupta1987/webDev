@@ -3,11 +3,12 @@ let cardList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cu
 const cards = document.querySelectorAll('.card');
 let movesText = document.querySelector('.moves');
 let openCards = [];
-let matchCards = [];
 let moves = 0;
 let countTimer = 0;
 let timerPtr =0;
 let isGameStarted = false;
+let matchedCardCounter = 0;
+const GAME_FINISHED_COUNTER = 8;
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -36,8 +37,10 @@ function addListenerOnCards() {
 
 function cardClicked(event) {
     if (event.target.className == "card") {
+        if(checkIfGameFinished()){
+            return;
+        }
         this.className += " open show";
-        
         if(!isGameStarted){
             isGameStarted = true;
             countTimer =0;
@@ -51,6 +54,14 @@ function cardClicked(event) {
             movesText.textContent = moves;
             checkIfCardsMatch();
         }
+    }
+}
+
+function checkIfGameFinished(){
+    if(matchedCardCounter == GAME_FINISHED_COUNTER){
+        alert("You won the game");
+        openCards = [];
+        
     }
 }
 
@@ -70,6 +81,7 @@ function getClassName(card){
  */
 function checkIfCardsMatch() {
     if (getClassName(openCards[0]) === getClassName(openCards[1])) {
+        matchedCardCounter++;
         cardsMatched();
     } else {
         cardsNotMatched();

@@ -79,7 +79,8 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
-    animation: shake 0.5s;
+    animation-name: shake;
+    animation-duration:  0.5s;
 }
 
 @keyframes shake {
@@ -97,10 +98,23 @@ h1 {
 }
 
 .deck .card.notMatch{
-    background:red;
-    animation: shake 2.5s;
+    animation-name: shake-hori;
+    animation-duration: 0.5s;
 }
 
+@keyframes shake-hori {
+    0% { background-color:red; transform: translate(1px, 1px) rotate(0deg); }
+    10% { background-color:red; transform: translate(-1px, -2px) rotate(-2deg); }
+    20% { background-color:red; transform: translate(-3px, 0px) rotate(2deg); }
+    30% { background-color:red; transform: translate(3px, 2px) rotate(0deg); }
+    40% { background-color:red; transform: translate(1px, -1px) rotate(2deg); }
+    50% { background-color:red; transform: translate(-1px, 2px) rotate(-2deg); }
+    60% { background-color:red; transform: translate(-3px, 1px) rotate(0deg); }
+    70% { background-color:red; transform: translate(3px, 1px) rotate(-2deg); }
+    80% { background-color:red; transform: translate(-1px, -1px) rotate(2deg); }
+    90% { background-color:red; transform: translate(1px, 2px) rotate(0deg); }
+    100% { background: #2e3d49; transform: translate(1px, -2px) rotate(-2deg); }
+}
 
 
 /*
