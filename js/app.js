@@ -10,7 +10,7 @@ let isGameStarted = false;
 let matchedCardCounter = 0;
 const GAME_FINISHED_COUNTER = 8;
 let MOVES_TO_LOOSE_STAR = 5;
-const NUMBER_OF_STARS = 3;
+let NUMBER_OF_STARS = 3;
 let CARD_TO_LOOSE_STAR = 1;
 const MAX_MOVES = 30;
 
@@ -41,9 +41,6 @@ function addListenerOnCards() {
 
 function cardClicked(event) {
     if (event.target.className == "card") {
-        if (checkIfGameFinished()) {
-            return;
-        }
         this.className += " open show";
         if (!isGameStarted) {
             isGameStarted = true;
@@ -60,10 +57,30 @@ function cardClicked(event) {
 }
 
 function checkIfGameFinished() {
-    if (matchedCardCounter == GAME_FINISHED_COUNTER) {
-        alert("You won the game");
+    if (matchedCardCounter === 1) {
+        swal({
+            closeOnEsc: false,
+            closeOnClickOutside: false,
+            title: "Congratulations! You Won!",
+            text: "With " + movesCount + " Moves and " + NUMBER_OF_STARS+ " Stars in " + countTimer + " Seconds.",
+            icon: "success",
+            buttons: {
+            cancel: "Close",
+            catch: {
+                text: "Play Again!",
+                value: true,
+                closeModal: true,
+            },
+        },
+        })
+        .then(function(value) {
+            if(value){
+                refresh();
+            }else{
+                resetTimer();
+            }
+        });
         openCards = [];
-
     }
 }
 
@@ -96,6 +113,9 @@ function cardsMatched() {
     openCards.forEach(function (card) {
         card.className = "card match";
     });
+    if (checkIfGameFinished()) {
+        return;
+    }
 }
 
 function cardsNotMatched() {
@@ -151,6 +171,9 @@ function loseStar() {
             starIcon.className = "fa fa-star-half-o";
         }
         }
+        if(NUMBER_OF_STARS > 0){
+            NUMBER_OF_STARS = NUMBER_OF_STARS - 0.5;
+        }
         MOVES_TO_LOOSE_STAR +=5;
         if((CARD_TO_LOOSE_STAR+2) < 8){
             CARD_TO_LOOSE_STAR = CARD_TO_LOOSE_STAR + 2;
@@ -162,6 +185,10 @@ function loseStar() {
 
 function refresh() {
     movesCount = 0;
+    MOVES_TO_LOOSE_STAR = 5;
+    NUMBER_OF_STARS = 3;
+    CARD_TO_LOOSE_STAR = 1;
+    matchedCardCounter = 0;
     updateMoves();
     resetTimer();
     resetDeck();
