@@ -39,6 +39,9 @@ function addListenerOnCards() {
     });
 }
 
+/*Called when card is clicked, It checks if open cards are matched, increase moves, updates stars and 
+ * also checks if user won the game*/
+
 function cardClicked(event) {
     if (event.target.className == "card") {
         if (!isGameStarted) {
@@ -53,7 +56,7 @@ function cardClicked(event) {
             let isCardMatch = checkIfCardsMatch();
             updateMoves();
             loseStar();
-            if(isCardMatch){
+            if (isCardMatch) {
                 checkIfGameFinished();
             }
             openCards = [];
@@ -61,37 +64,40 @@ function cardClicked(event) {
     }
 }
 
-/* if all cards have matched, display a message with the final score*/
+/* if all cards have matched, display a modal with winning message, final score, rating. 
+ * Also provides two buttons Close and Play Again. If user clicks on Play Again, it starts the game again.
+ */
 
 function checkIfGameFinished() {
-    if (matchedCardCounter === 1) {
+    if (matchedCardCounter === GAME_FINISHED_COUNTER) {
         clearTimeout(timerPtr);
         swal({
-            closeOnEsc: false,
-            closeOnClickOutside: false,
-            title: "Congratulations! You Won!",
-            text: "With " + movesCount + " Moves and " + NUMBER_OF_STARS+ " Stars in " + countTimer + " Seconds.",
-            icon: "success",
-            buttons: {
-            cancel: "Close",
-            success: {
-                text: "Play Again!",
-                value: true,
-                closeModal: true,
-            },
-        },
-        })
-        .then(function(value) {
-            if(value){
-                refresh();
-            }else{
-                clearTimeout(timerPtr);
-            }
-        });
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+                title: "Congratulations! You Won!",
+                text: "With " + movesCount + " Moves and " + NUMBER_OF_STARS + " Stars in " + countTimer + " Seconds.",
+                icon: "success",
+                buttons: {
+                    cancel: "Close",
+                    success: {
+                        text: "Play Again!",
+                        value: true,
+                        closeModal: true,
+                    },
+                },
+            })
+            .then(function (value) {
+                if (value) {
+                    refresh();
+                } else {
+                    clearTimeout(timerPtr);
+                }
+            });
         openCards = [];
     }
 }
 
+/*Function to start the timer. */
 function startTimer() {
     countTimer += 1;
     document.querySelector('.timer').textContent = countTimer;
@@ -171,36 +177,32 @@ function updateMoves() {
  *25 moves, 8 match
  */
 function loseStar() {
-    if(movesCount === MOVES_TO_LOOSE_STAR && MOVES_TO_LOOSE_STAR <=MAX_MOVES){
-        if(matchedCardCounter < CARD_TO_LOOSE_STAR ){
-         let starIcon = document.querySelector('.fa-star-half-o');
-        if(starIcon){
-            starIcon.className = "fa fa-star-o";
-        }else{
-            let starsIcon = document.querySelectorAll('.fa-star');
-            starIcon = starsIcon[starsIcon.length-1];
-            starIcon.className = "fa fa-star-half-o";
+    if (movesCount === MOVES_TO_LOOSE_STAR && MOVES_TO_LOOSE_STAR <= MAX_MOVES) {
+        if (matchedCardCounter < CARD_TO_LOOSE_STAR) {
+            let starIcon = document.querySelector('.fa-star-half-o');
+            if (starIcon) {
+                starIcon.className = "fa fa-star-o";
+            } else {
+                let starsIcon = document.querySelectorAll('.fa-star');
+                starIcon = starsIcon[starsIcon.length - 1];
+                starIcon.className = "fa fa-star-half-o";
+            }
         }
-        }
-        if(NUMBER_OF_STARS > 0){
+        if (NUMBER_OF_STARS > 0) {
             NUMBER_OF_STARS = NUMBER_OF_STARS - 0.5;
         }
-        MOVES_TO_LOOSE_STAR +=5;
-        if((CARD_TO_LOOSE_STAR+2) < 8){
+        MOVES_TO_LOOSE_STAR += 5;
+        if ((CARD_TO_LOOSE_STAR + 2) < 8) {
             CARD_TO_LOOSE_STAR = CARD_TO_LOOSE_STAR + 2;
-        }else{
+        } else {
             CARD_TO_LOOSE_STAR = 8;
         }
     }
 }
 
 function refresh() {
-    movesCount = 0;
-    MOVES_TO_LOOSE_STAR = 5;
-    NUMBER_OF_STARS = 3;
-    CARD_TO_LOOSE_STAR = 1;
-    matchedCardCounter = 0;
     isGameStarted = false;
+    resetCounters();
     updateMoves();
     resetTimer();
     resetDeck();
@@ -210,31 +212,28 @@ function refresh() {
     openCards = [];
 }
 
+function resetCounters() {
+    movesCount = 0;
+    MOVES_TO_LOOSE_STAR = 5;
+    NUMBER_OF_STARS = 3;
+    CARD_TO_LOOSE_STAR = 1;
+    matchedCardCounter = 0;
+}
+
 function resetTimer() {
     countTimer = 0;
     clearTimeout(timerPtr);
     document.querySelector('.timer').textContent = countTimer;
 }
 
-function resetStars(){
-    document.querySelectorAll('.stars li').forEach(function(e){
+function resetStars() {
+    document.querySelectorAll('.stars li').forEach(function (e) {
         e.firstElementChild.className = "fa fa-star";
     });
 }
+
 function resetDeck() {
     cards.forEach(function (elem) {
         elem.className = "card";
     });
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
