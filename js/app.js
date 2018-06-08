@@ -41,23 +41,31 @@ function addListenerOnCards() {
 
 function cardClicked(event) {
     if (event.target.className == "card") {
-        this.className += " open show";
         if (!isGameStarted) {
             isGameStarted = true;
             countTimer = 0;
             timerPtr = setTimeout(startTimer, 1000);
-            updateMoves();
         }
         openCards.push(this);
+        this.className += " open show";
         if (openCards.length === 2) {
             movesCount += 1;
-            checkIfCardsMatch();
+            let isCardMatch = checkIfCardsMatch();
+            updateMoves();
+            loseStar();
+            if(isCardMatch){
+                checkIfGameFinished();
+            }
+            openCards = [];
         }
     }
 }
 
+/* if all cards have matched, display a message with the final score*/
+
 function checkIfGameFinished() {
     if (matchedCardCounter === 1) {
+        clearTimeout(timerPtr);
         swal({
             closeOnEsc: false,
             closeOnClickOutside: false,
@@ -66,7 +74,7 @@ function checkIfGameFinished() {
             icon: "success",
             buttons: {
             cancel: "Close",
-            catch: {
+            success: {
                 text: "Play Again!",
                 value: true,
                 closeModal: true,
@@ -77,7 +85,7 @@ function checkIfGameFinished() {
             if(value){
                 refresh();
             }else{
-                resetTimer();
+                clearTimeout(timerPtr);
             }
         });
         openCards = [];
@@ -102,20 +110,17 @@ function checkIfCardsMatch() {
     if (getClassName(openCards[0]) === getClassName(openCards[1])) {
         matchedCardCounter++;
         cardsMatched();
+        return true;
     } else {
         cardsNotMatched();
+        return false;
     }
-    updateMoves();
-    openCards = [];
 }
 
 function cardsMatched() {
     openCards.forEach(function (card) {
         card.className = "card match";
     });
-    if (checkIfGameFinished()) {
-        return;
-    }
 }
 
 function cardsNotMatched() {
@@ -156,9 +161,15 @@ function shuffle(array) {
 
 function updateMoves() {
     movesText.textContent = movesCount;
-    loseStar();
 }
 
+/*Critera for getting 3 star rating:
+ *5 moves, 1 match
+ *10 moves, 3 match
+ *15 moves, 5 match
+ *20 moves, 7 match
+ *25 moves, 8 match
+ */
 function loseStar() {
     if(movesCount === MOVES_TO_LOOSE_STAR && MOVES_TO_LOOSE_STAR <=MAX_MOVES){
         if(matchedCardCounter < CARD_TO_LOOSE_STAR ){
@@ -189,6 +200,7 @@ function refresh() {
     NUMBER_OF_STARS = 3;
     CARD_TO_LOOSE_STAR = 1;
     matchedCardCounter = 0;
+    isGameStarted = false;
     updateMoves();
     resetTimer();
     resetDeck();
@@ -211,7 +223,7 @@ function resetStars(){
 }
 function resetDeck() {
     cards.forEach(function (elem) {
-        elem.className = "" + "card";
+        elem.className = "card";
     });
 }
 
