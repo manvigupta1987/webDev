@@ -12,6 +12,7 @@ let cardList = [
 cardList = [...cardList, ...cardList];
 
 const cards = document.querySelectorAll('.card'),
+    deck = document.querySelector('.deck');
     GAME_FINISHED_COUNTER = 8,
     MAX_MOVES = 30;
 
@@ -45,8 +46,9 @@ function addListenerOnCards() {
         elem.firstElementChild.className = "";
         elem.firstElementChild.className = "fa " + cardList[itemCount];
         itemCount++;
-        elem.addEventListener('click', cardClicked);
+        //elem.addEventListener('click', cardClicked);
     });
+    deck.addEventListener('click', cardClicked);
 }
 
 /*Called when card is clicked, It checks if open cards are matched, increase moves, updates stars and 
@@ -59,8 +61,9 @@ function cardClicked(event) {
             countTimer = 0;
             timerPtr = setTimeout(startTimer, 1000);
         }
-        openCards.push(this);
-        this.className += " open show";
+        //openCards.push(this);
+        openCards.push(event.target);
+        event.target.className += " open show";
         if (openCards.length === 2) {
             movesCount += 1;
             let isCardMatch = checkIfCardsMatch();
