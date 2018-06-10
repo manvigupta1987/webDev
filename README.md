@@ -16,3 +16,9 @@ to score 3 star rating, it should match below criteria:
 5 match in 15 moves
 7 match in 20 moves
 8 match in 25 moves
+
+### External libraries Used
+
+* [font-awesome](https://fontawesome.com/v4.7.0/icons/)
+* [sweetalert](https://sweetalert.js.org/guides/)
+* [Coda font](https://fonts.google.com/specimen/Coda)

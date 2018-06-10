@@ -1,18 +1,34 @@
-let cardList = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor", "fa-leaf", "fa-bicycle", "fa-diamond", "fa-bomb", "fa-leaf", "fa-bomb", "fa-bolt", "fa-bicycle", "fa-paper-plane-o", "fa-cube"];
+let cardList = [
+    "fa-diamond", 
+    "fa-paper-plane-o",
+    "fa-anchor",
+    "fa-bolt",
+    "fa-cube",
+    "fa-anchor",
+    "fa-leaf",
+    "fa-bicycle",
+    "fa-diamond",
+    "fa-bomb",
+    "fa-leaf",
+    "fa-bomb",
+    "fa-bolt",
+    "fa-bicycle",
+    "fa-paper-plane-o",
+    "fa-cube"
+];
 
-const cards = document.querySelectorAll('.card');
-let movesText = document.querySelector('.moves');
-let openCards = [];
-let movesCount = 0;
-let countTimer = 0;
-let timerPtr = 0;
-let isGameStarted = false;
-let matchedCardCounter = 0;
-const GAME_FINISHED_COUNTER = 8;
-let MOVES_TO_LOOSE_STAR = 5;
-let NUMBER_OF_STARS = 3;
-let CARD_TO_LOOSE_STAR = 1;
-const MAX_MOVES = 30;
+const cards = document.querySelectorAll('.card'),
+      GAME_FINISHED_COUNTER = 8,
+      MAX_MOVES = 30;
+
+let movesText = document.querySelector('.moves'),
+    openCards = [],
+    isGameStarted = false,
+    MOVES_TO_LOOSE_STAR = 5,
+    NUMBER_OF_STARS = 3,
+    CARD_TO_LOOSE_STAR = 1;
+
+let movesCount = countTimer = timerPtr = matchedCardCounter = 0;
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -75,7 +91,7 @@ function checkIfGameFinished() {
                 closeOnEsc: false,
                 closeOnClickOutside: false,
                 title: "Congratulations! You Won!",
-                text: "With " + movesCount + " Moves and " + NUMBER_OF_STARS + " Stars in " + countTimer + " Seconds.",
+                text: `With ${movesCount} Moves and ${NUMBER_OF_STARS} Stars in ${countTimer} Seconds.`,
                 icon: "success",
                 buttons: {
                     cancel: "Close",
@@ -87,11 +103,7 @@ function checkIfGameFinished() {
                 },
             })
             .then(function (value) {
-                if (value) {
-                    refresh();
-                } else {
-                    clearTimeout(timerPtr);
-                }
+                value ? refresh() : clearTimeout(timerPtr);
             });
         openCards = [];
     }
@@ -178,7 +190,7 @@ function updateMoves() {
  */
 function loseStar() {
     if (movesCount === MOVES_TO_LOOSE_STAR && MOVES_TO_LOOSE_STAR <= MAX_MOVES) {
-        if (matchedCardCounter < CARD_TO_LOOSE_STAR) {
+        if (matchedCardCounter < CARD_TO_LOOSE_STAR && NUMBER_OF_STARS > 1) {
             let starIcon = document.querySelector('.fa-star-half-o');
             if (starIcon) {
                 starIcon.className = "fa fa-star-o";
@@ -187,8 +199,6 @@ function loseStar() {
                 starIcon = starsIcon[starsIcon.length - 1];
                 starIcon.className = "fa fa-star-half-o";
             }
-        }
-        if (NUMBER_OF_STARS > 0) {
             NUMBER_OF_STARS = NUMBER_OF_STARS - 0.5;
         }
         MOVES_TO_LOOSE_STAR += 5;
