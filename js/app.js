@@ -55,7 +55,7 @@ function addListenerOnCards() {
  * also checks if user won the game*/
 
 function cardClicked(event) {
-    if (event.target.className == "card") {
+    if (event.target && event.target.className === "card") {
         if (!isGameStarted) {
             isGameStarted = true;
             countTimer = 0;
