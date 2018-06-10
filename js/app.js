@@ -1,25 +1,19 @@
 let cardList = [
-    "fa-diamond", 
+    "fa-diamond",
     "fa-paper-plane-o",
     "fa-anchor",
     "fa-bolt",
     "fa-cube",
-    "fa-anchor",
-    "fa-leaf",
-    "fa-bicycle",
-    "fa-diamond",
     "fa-bomb",
     "fa-leaf",
-    "fa-bomb",
-    "fa-bolt",
-    "fa-bicycle",
-    "fa-paper-plane-o",
-    "fa-cube"
+    "fa-bicycle"
 ];
 
+cardList = [...cardList, ...cardList];
+
 const cards = document.querySelectorAll('.card'),
-      GAME_FINISHED_COUNTER = 8,
-      MAX_MOVES = 30;
+    GAME_FINISHED_COUNTER = 8,
+    MAX_MOVES = 30;
 
 let movesText = document.querySelector('.moves'),
     openCards = [],
@@ -183,10 +177,10 @@ function updateMoves() {
 
 /*Critera for getting 3 star rating:
  *5 moves, 1 match
- *10 moves, 3 match
+ *10 moves, 3 match 
  *15 moves, 5 match
  *20 moves, 7 match
- *25 moves, 8 match
+ * if above criteria doesn't match, loose half a star each time. after 20 moves, no star is deducted.
  */
 function loseStar() {
     if (movesCount === MOVES_TO_LOOSE_STAR && MOVES_TO_LOOSE_STAR <= MAX_MOVES) {

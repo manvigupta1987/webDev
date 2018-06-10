@@ -15,7 +15,7 @@ to score 3 star rating, it should match below criteria:
 3 match in 10 moves
 5 match in 15 moves
 7 match in 20 moves
-8 match in 25 moves
+if above criteria doesn't match, loose half a star each time. after 20 moves, no star is deducted.
 
 ### External libraries Used
 
