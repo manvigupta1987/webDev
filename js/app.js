@@ -26,7 +26,7 @@ let movesText = document.querySelector('.moves'),
 let movesCount = countTimer = timerPtr = matchedCardCounter = 0;
 
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded',  () => {
     /*this function creates a card of list and add listener on each card*/
     cardList = shuffle(cardList);
     addListenerOnCards();
@@ -40,13 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 function addListenerOnCards() {
     let itemCount = 0;
-    cards.forEach(function (elem) {
-        //let faIcon = elem.innerHTML;
-        //cardList.push(findCardName(faIcon));
+    cards.forEach(elem => {
         elem.firstElementChild.className = "";
         elem.firstElementChild.className = "fa " + cardList[itemCount];
         itemCount++;
-        //elem.addEventListener('click', cardClicked);
     });
     deck.addEventListener('click', cardClicked);
 }
@@ -99,7 +96,7 @@ function checkIfGameFinished() {
                     },
                 },
             })
-            .then(function (value) {
+            .then(value =>{
                 value ? refresh() : clearTimeout(timerPtr);
             });
         openCards = [];
@@ -133,20 +130,20 @@ function checkIfCardsMatch() {
 }
 
 function cardsMatched() {
-    openCards.forEach(function (card) {
+    openCards.forEach(card => {
         card.className = "card match";
     });
 }
 
 function cardsNotMatched() {
-    openCards.forEach(function (card) {
+    openCards.forEach(card => {
         card.className += " notMatch";
     });
     setTimeout(resetClass, 500);
 }
 
 function resetClass() {
-    document.querySelectorAll(".notMatch").forEach(function (elem) {
+    document.querySelectorAll(".notMatch").forEach(elem => {
         elem.className = "card";
     });
 }
@@ -234,13 +231,13 @@ function resetTimer() {
 }
 
 function resetStars() {
-    document.querySelectorAll('.stars li').forEach(function (e) {
+    document.querySelectorAll('.stars li').forEach(e =>{
         e.firstElementChild.className = "fa fa-star";
     });
 }
 
 function resetDeck() {
-    cards.forEach(function (elem) {
+    cards.forEach(elem =>{
         elem.className = "card";
     });
 }
