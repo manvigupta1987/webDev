@@ -23,6 +23,9 @@ Enemy.prototype.update = function(dt) {
         this.speed = 100 + (Math.floor(Math.random() * 40) + 20);
     }
 
+    if(this.y === player.y){
+        player.resetPosition();
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -33,33 +36,57 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed) {
+var Player = function(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = speed;
     this.sprite = 'img/char-boy.png';
 }
 
-
 Player.prototype.update = function() {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    //if the player reaches to the left side of canvas, set the position to 0.
+    if(this.x < 0 ){
+        this.x  = 0;
+    }
+    //if the player reaches to the right most side of canvas, set the position to 400.
+    if(this.x > 400){
+        this.x = 400;
+    }
+    //If the player touches the water, resets the position to initial position.
+    if(this.y < 0){
+        this.resetPosition();
+    }
+    //If the player touches the downmost of the canvas, reset the y position to initial position.
+    if(this.y > 400){
+        this.y = 373;
+    }
 };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function() {
+Player.prototype.resetPosition = function() {
+    this.x = 202;
+    this.y = 373;
+}
 
+Player.prototype.handleInput = function(keyCode) {
+    if(keyCode === 'left'){
+        this.x =  this.x - 101;
+    }else if(keyCode === 'up'){
+        this.y = this.y - 83;
+    }else if(keyCode === 'right'){
+        this.x = this.x + 101;
+    }else if(keyCode === 'down'){
+        this.y = this.y + 83 ;
+    }
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(200, 300, 50);
+var player = new Player(202, 415);
 var yXPosition = [60, 145, 225];
 
 yXPosition.forEach(function(posY){
