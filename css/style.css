@@ -1,3 +1,42 @@
 body {
     text-align: center;
+	box-sizing: border-box;
+	 margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/background4.jpg'); /* Background pattern from Subtle Patterns */
+}
+
+.container {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    flex-direction: column;
+}
+
+.instructions{
+	padding: 0;
+	margin: 0;
+}
+.instructions p span{
+	font-size: 16px;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.instructions p{
+	font-style: italic;
+}
+
+.players{
+	background: transparent;
+}
+.players .choose-btn{
+	border: none;
+	cursor: pointer;
+	width: 150px;
+	height: 120px;
 }
