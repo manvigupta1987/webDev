@@ -23,7 +23,7 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + (this.speed*dt);
     if(this.x > 502){
         this.x = -90;
-        this.speed = 100 + (Math.floor(Math.random() * 10) + 20) * level;
+        this.speed = 100 + (Math.floor(Math.random() * 20) + 20) * level;
     }
 
     var width = 171;

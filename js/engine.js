@@ -166,10 +166,11 @@ var Engine = (function(global) {
         // noop
         allEnemies = [];
         var yXPosition = [60, 145, 225];
+        var XPos = -101;
         yXPosition.forEach(function(posY){
             allEnemies.push(new Enemy(-101, posY, Math.floor(Math.random() * 40)));
         });
-        allEnemies.push(new Enemy(-101, 60 + (75 * (Math.floor(Math.random() * 3)))));
+        allEnemies.push(new Enemy(-101, 60 + (75 * (Math.floor(Math.random() * 4)))));
         player = new Player(202, 393);
     }
 
