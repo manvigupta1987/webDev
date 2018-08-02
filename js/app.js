@@ -1,6 +1,7 @@
 // Enemies our player must avoid
 
 var level = 1;
+var isGamePause = false;
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -78,15 +79,24 @@ Player.prototype.resetPosition = function() {
 }
 
 Player.prototype.handleInput = function(keyCode) {
-    if(keyCode === 'left'){
-        this.x =  this.x - 101;
-    }else if(keyCode === 'up'){
-        this.y = this.y - 83;
-    }else if(keyCode === 'right'){
-        this.x = this.x + 101;
-    }else if(keyCode === 'down'){
-        this.y = this.y + 83 ;
+    if(!isGamePause){
+        if(keyCode === 'left'){
+            this.x =  this.x - 101;
+        }else if(keyCode === 'up'){
+            this.y = this.y - 83;
+        }else if(keyCode === 'right'){
+            this.x = this.x + 101;
+        }else if(keyCode === 'down'){
+            this.y = this.y + 83 ;
+        }else if(keyCode === 'space'){
+            isGamePause = true;
+        }
+    }else{
+        if (keyCode === 'space') {
+            isGamePause = false;
+        }
     }
+
 };
 
 // Now instantiate your objects.
@@ -102,7 +112,8 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        32: 'space'
     };
     player.handleInput(allowedKeys[e.keyCode]);
 });
