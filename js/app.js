@@ -1,7 +1,7 @@
 // Enemies our player must avoid
 
 var level = 1;
-var Enemy = function(x, y, speed) {
+var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -9,7 +9,7 @@ var Enemy = function(x, y, speed) {
     // a helper we've provided to easily load img
     this.x = x;
     this.y = y;
-    this.speed = speed;
+    this.speed = Math.floor(Math.random() * 200) + 50;
     this.sprite = 'img/enemy-bug.png';
 };
 
@@ -93,12 +93,7 @@ Player.prototype.handleInput = function(keyCode) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(202, 393);
-var yXPosition = [60, 145, 225];
-
-yXPosition.forEach(function(posY){
-    allEnemies.push(new Enemy(-90, posY, Math.floor(Math.random() * 40) + 50));
-});
+var player;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -109,7 +104,6 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
 

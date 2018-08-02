@@ -162,6 +162,13 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        allEnemies = [];
+        var yXPosition = [60, 145, 225];
+        yXPosition.forEach(function(posY){
+            allEnemies.push(new Enemy(-101, posY, Math.floor(Math.random() * 40)));
+        });
+        allEnemies.push(new Enemy(-101, 60 + (75 * (Math.floor(Math.random() * 3)))));
+        player = new Player(202, 393);
     }
 
     /* Go ahead and load all of the img we know we're going to need to
