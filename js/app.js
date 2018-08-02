@@ -1,4 +1,6 @@
 // Enemies our player must avoid
+
+var level = 1;
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -20,10 +22,14 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + (this.speed*dt);
     if(this.x > 502){
         this.x = -90;
-        this.speed = 100 + (Math.floor(Math.random() * 40) + 20);
+        this.speed = 100 + (Math.floor(Math.random() * 10) + 20) * level;
     }
 
-    if(this.y === player.y){
+    var width = 171;
+    var height = 101 ;
+    if(((this.x < player.x + 75) && (this.x > player.x - 75)) &&
+        (this.y > player.y - 75 && this.y < player.y + 75)) {
+        console.log("crashed");
         player.resetPosition();
     }
 };
@@ -54,10 +60,11 @@ Player.prototype.update = function() {
     //If the player touches the water, resets the position to initial position.
     if(this.y < 0){
         this.resetPosition();
+        level++;
     }
     //If the player touches the downmost of the canvas, reset the y position to initial position.
     if(this.y > 400){
-        this.y = 373;
+        this.y = 393;
     }
 };
 
@@ -67,7 +74,7 @@ Player.prototype.render = function() {
 
 Player.prototype.resetPosition = function() {
     this.x = 202;
-    this.y = 373;
+    this.y = 393;
 }
 
 Player.prototype.handleInput = function(keyCode) {
@@ -86,7 +93,7 @@ Player.prototype.handleInput = function(keyCode) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(202, 415);
+var player = new Player(202, 393);
 var yXPosition = [60, 145, 225];
 
 yXPosition.forEach(function(posY){
