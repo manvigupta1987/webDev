@@ -1,6 +1,7 @@
 // Enemies our player must avoid
 
 let level = 1;
+let MAX_LEVEL = 10;
 let isGamePause = false;
 
 // Now instantiate your objects.
@@ -59,6 +60,7 @@ var Player = function(x, y) {
     this.y = y;
     this.sprite = 'img/char-boy.png';
     this.life = 3;
+    this.score = 0;
 }
 
 Player.prototype.update = function() {
@@ -73,7 +75,8 @@ Player.prototype.update = function() {
     //If the player touches the water, resets the position to initial position.
     if(this.y < 0){
         this.resetPosition();
-        level++;
+        (level < MAX_LEVEL) ? level++ : level;
+        this.updateScore(2);
     }
     //If the player touches the downmost of the canvas, reset the y position to initial position.
     if(this.y > 400){
@@ -88,6 +91,11 @@ Player.prototype.render = function() {
 Player.prototype.resetPosition = function() {
     this.x = 202;
     this.y = 393;
+}
+
+Player.prototype.updateScore = function(num){
+    this.score = this.score + num;
+    document.querySelector("#score-id").textContent = this.score;
 }
 
 Player.prototype.handleInput = function(keyCode) {

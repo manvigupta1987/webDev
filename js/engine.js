@@ -103,6 +103,7 @@ var Engine = (function(global) {
                 console.log("crashed");
                 player.resetPosition();
                 reduceLife();
+                player.updateScore(-1);
             }
         });
     }
@@ -213,8 +214,9 @@ function reduceLife(){
         });
         allEnemies.push(new Enemy(-101, (60+ Math.floor(Math.random() * 100))));
         player = new Player(202, 393);
-
+        player.updateScore(0);
         resetLifes();
+
     }
 
     function resetLifes(){
