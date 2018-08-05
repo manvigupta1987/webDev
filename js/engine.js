@@ -13,7 +13,7 @@
  * writing app.js a little simpler to work with.
  */
 
-var Engine = (function(global) {
+var Engine = (function (global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
@@ -76,7 +76,7 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        if(!isGamePause){
+        if (!isGamePause) {
             updateEntities(dt);
             checkCollisions();
         }
@@ -90,24 +90,24 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        allEnemies.forEach(function(enemy) {
+        allEnemies.forEach(function (enemy) {
             enemy.update(dt);
         });
         player.update();
     }
 
-    function checkCollisions(){
-        if(bonus){
-            if((bonus.y < player.y + 75 && bonus.y > player.y - 75)&&
-               (bonus.x < player.x + 75 && bonus.x > player.x - 75)){
+    function checkCollisions() {
+        if (bonus) {
+            if ((bonus.y < player.y + 75 && bonus.y > player.y - 75) &&
+                (bonus.x < player.x + 75 && bonus.x > player.x - 75)) {
                 player.updateScore(bonus.points);
                 bonus = null;
             }
         }
 
-        allEnemies.forEach(function(enemy){
-            if((enemy.x < player.x+75 && enemy.x > player.x-75) &&
-               (enemy.y > player.y - 75 && enemy.y < player.y + 75)) {
+        allEnemies.forEach(function (enemy) {
+            if ((enemy.x < player.x + 75 && enemy.x > player.x - 75) &&
+                (enemy.y > player.y - 75 && enemy.y < player.y + 75)) {
                 console.log("crashed");
                 player.resetPosition();
                 reduceLife();
@@ -117,36 +117,35 @@ var Engine = (function(global) {
         });
     }
 
-function reduceLife(){
-    if(player.life > 0)
-    {
-        player.life = player.life-1;
-        let lifeIcons = document.querySelectorAll('.fa-heart');
-        lifeIcons[lifeIcons.length -1].className = "fa fa-heart-o";
-    }else {
-        isGamePause = true;
-        swal({
-                closeOnEsc: false,
-                closeOnClickOutside: false,
-                title: "Game Over!!! You lost the Game",
-                text: `Your score is `,
-                icon: "success",
-                buttons: {
-                    cancel: "Close",
-                    success: {
-                        text: "Play Again!",
-                        value: true,
-                        closeModal: true,
+    function reduceLife() {
+        if (player.life > 0) {
+            player.life = player.life - 1;
+            let lifeIcons = document.querySelectorAll('.fa-heart');
+            lifeIcons[lifeIcons.length - 1].className = "fa fa-heart-o";
+        } else {
+            isGamePause = true;
+            swal({
+                    closeOnEsc: false,
+                    closeOnClickOutside: false,
+                    title: "Game Over!!! You lost the Game",
+                    text: `Your score is ${player.score}`,
+                    icon: "success",
+                    buttons: {
+                        cancel: "Close",
+                        success: {
+                            text: "Play Again!",
+                            value: true,
+                            closeModal: true,
+                        },
                     },
-                },
-            })
-            .then(function (value) {
-                if(value){
-                   init();
-                   isGamePause = false;
-               }
-            });
-    }
+                })
+                .then(function (value) {
+                    if (value) {
+                        init();
+                        isGamePause = false;
+                    }
+                });
+        }
     }
 
     /* This function initially draws the "game level", it will then call
@@ -160,19 +159,19 @@ function reduceLife(){
          * for that particular row of the game level.
          */
         var rowImages = [
-                'img/water-block.png',   // Top row is water
-                'img/stone-block.png',   // Row 1 of 3 of stone
-                'img/stone-block.png',   // Row 2 of 3 of stone
-                'img/stone-block.png',   // Row 3 of 3 of stone
-                'img/grass-block.png',   // Row 1 of 2 of grass
-                'img/grass-block.png'    // Row 2 of 2 of grass
+                'img/water-block.png', // Top row is water
+                'img/stone-block.png', // Row 1 of 3 of stone
+                'img/stone-block.png', // Row 2 of 3 of stone
+                'img/stone-block.png', // Row 3 of 3 of stone
+                'img/grass-block.png', // Row 1 of 2 of grass
+                'img/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -202,12 +201,12 @@ function reduceLife(){
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        allEnemies.forEach(function(enemy) {
+        allEnemies.forEach(function (enemy) {
             enemy.render();
         });
 
         player.render();
-        if(bonus){
+        if (bonus) {
             bonus.render();
         }
     }
@@ -221,10 +220,10 @@ function reduceLife(){
         allEnemies = [];
         var yXPosition = [60, 145, 225];
         var XPos = -101;
-        yXPosition.forEach(function(posY){
+        yXPosition.forEach(function (posY) {
             allEnemies.push(new Enemy(-101, posY, Math.floor(Math.random() * 40)));
         });
-        allEnemies.push(new Enemy(-101, (60+ Math.floor(Math.random() * 100))));
+        allEnemies.push(new Enemy(-101, (60 + Math.floor(Math.random() * 100))));
         player = new Player(202, 393);
         player.updateScore(0);
         bonus = new Bonus();
@@ -232,8 +231,8 @@ function reduceLife(){
 
     }
 
-    function resetLifes(){
-         document.querySelectorAll('.life li').forEach(e =>{
+    function resetLifes() {
+        document.querySelectorAll('.life li').forEach(e => {
             e.firstElementChild.className = "fa fa-heart";
         });
     }

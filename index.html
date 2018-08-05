@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
@@ -8,34 +9,33 @@
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
+
 <body>
-	<div class="container">
-		<section class="player-section">
-			<div class="players">
-				<button class="choose-btn"><img src="img/char-cat-girl.png"></button>
-				<button class="choose-btn"><img src="img/char-horn-girl.png"></button>
-				<button class="choose-btn"><img src="img/char-pink-girl.png"></button>
-				<button class="choose-btn"><img src="img/char-princess-girl.png"></button>
-				<button class="choose-btn"><img src="img/char-boy.png"></button>
-			</div>
-		</section>
-		<section class="score-panel">
-			<ul class="life">
-				<li><i class="fa fa-heart" ></i></li>
-				<li><i class="fa fa-heart"></i></li>
-				<li><i class="fa fa-heart"></i></li>
-			</ul>
-			<div class="panel-right"> Score : <span id="score-id">0</span></div>
-		</section>
-		<canvas id="myCanvas" width="505" height="606"></canvas>
-		<div class="instructions">
-			<p><span>Instructions: </span>Press Space to pause</p>
-		</div>
-	</div>
-<footer>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
-</footer>
+    <div class="container">
+        <section class="player-section">
+            <div class="players">
+                <button class="choose-btn"><img src="img/char-cat-girl.png"></button>
+                <button class="choose-btn"><img src="img/char-horn-girl.png"></button>
+                <button class="choose-btn"><img src="img/char-pink-girl.png"></button>
+                <button class="choose-btn"><img src="img/char-princess-girl.png"></button>
+                <button class="choose-btn"><img src="img/char-boy.png"></button>
+            </div>
+        </section>
+        <section class="score-panel">
+            <ul class="life">
+                <li><i class="fa fa-heart"></i></li>
+                <li><i class="fa fa-heart"></i></li>
+                <li><i class="fa fa-heart"></i></li>
+            </ul>
+            <div class="panel-right"> Score : <span id="score-id">0</span></div>
+        </section>
+        <canvas id="myCanvas" width="505" height="606"></canvas>
+    </div>
+    <footer>
+        <script src="js/resources.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/engine.js"></script>
+    </footer>
 </body>
+
 </html>

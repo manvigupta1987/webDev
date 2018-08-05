@@ -18,19 +18,6 @@ body {
     flex-direction: column;
 }
 
-.instructions{
-	padding: 0;
-	margin: 0;
-}
-.instructions p span{
-	font-size: 16px;
-	font-weight: bold;
-	font-style: italic;
-}
-
-.instructions p{
-	font-style: italic;
-}
 .player-section{
 	margin-top: 20px;
 	margin-left: auto;
