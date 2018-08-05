@@ -97,6 +97,14 @@ var Engine = (function(global) {
     }
 
     function checkCollisions(){
+        if(bonus){
+            if((bonus.y < player.y + 75 && bonus.y > player.y - 75)&&
+               (bonus.x < player.x + 75 && bonus.x > player.x - 75)){
+                player.updateScore(bonus.points);
+                bonus = null;
+            }
+        }
+
         allEnemies.forEach(function(enemy){
             if((enemy.x < player.x+75 && enemy.x > player.x-75) &&
                (enemy.y > player.y - 75 && enemy.y < player.y + 75)) {
@@ -104,6 +112,7 @@ var Engine = (function(global) {
                 player.resetPosition();
                 reduceLife();
                 player.updateScore(-1);
+                bonus = new Bonus();
             }
         });
     }
@@ -198,6 +207,9 @@ function reduceLife(){
         });
 
         player.render();
+        if(bonus){
+            bonus.render();
+        }
     }
 
     /* This function does nothing but it could have been a good place to
@@ -215,6 +227,7 @@ function reduceLife(){
         allEnemies.push(new Enemy(-101, (60+ Math.floor(Math.random() * 100))));
         player = new Player(202, 393);
         player.updateScore(0);
+        bonus = new Bonus();
         resetLifes();
 
     }
@@ -238,7 +251,10 @@ function reduceLife(){
         'img/char-cat-girl.png',
         'img/char-horn-girl.png',
         'img/char-pink-girl.png',
-        'img/char-princess-girl.png'
+        'img/char-princess-girl.png',
+        'img/gem-Blue.png',
+        'img/gem-Green.png',
+        'img/gem-Orange.png'
     ]);
     Resources.onReady(init);
 

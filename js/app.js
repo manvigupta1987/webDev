@@ -9,6 +9,7 @@ let isGamePause = false;
 // Place the player object in a variable called player
 let allEnemies = [];
 let player;
+let bonus;
 
 
 var Enemy = function(x, y) {
@@ -77,6 +78,7 @@ Player.prototype.update = function() {
         this.resetPosition();
         (level < MAX_LEVEL) ? level++ : level;
         this.updateScore(2);
+        bonus = new Bonus();
     }
     //If the player touches the downmost of the canvas, reset the y position to initial position.
     if(this.y > 400){
@@ -114,6 +116,27 @@ Player.prototype.handleInput = function(keyCode) {
     }
 };
 
+var Bonus = function(){
+    var images = [
+        'img/gem-Blue.png',
+        'img/gem-Green.png',
+        'img/gem-Orange.png'
+    ];
+    let value = Math.floor(Math.random() * 3);
+    this.sprite = images[value];
+    this.points = 5* value;
+
+    this.x  = 101 + Math.floor(Math.random() * 5);
+    this.y = 62+ (83 * (Math.floor(Math.random() * 3)));
+};
+
+Bonus.prototype.update = function(){
+
+}
+
+Bonus.prototype.render = function(){
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
