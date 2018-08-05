@@ -1,7 +1,15 @@
 // Enemies our player must avoid
 
-var level = 1;
-var isGamePause = false;
+let level = 1;
+let isGamePause = false;
+
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
+var allEnemies = [];
+var player;
+
+
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -99,24 +107,33 @@ Player.prototype.handleInput = function(keyCode) {
 
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-var allEnemies = [];
-var player;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
-        32: 'space'
-    };
-    player.handleInput(allowedKeys[e.keyCode]);
+document.addEventListener('DOMContentLoaded', function(){
+    document.addEventListener('keyup', function(e) {
+        var allowedKeys = {
+            37: 'left',
+            38: 'up',
+            39: 'right',
+            40: 'down',
+            32: 'space'
+        };
+        player.handleInput(allowedKeys[e.keyCode]);
+    });
+    let buttons = document.querySelector(".players");
+    buttons.addEventListener('click', (event) => {
+        if(event.target.tagName.toUpperCase() === "IMG"){
+        if(player !== undefined ){
+            player.sprite = event.target.getAttribute('src');
+            player.render();
+        }
+    }});
 });
+
+
+
+
 
 
 
