@@ -4,7 +4,7 @@
 ---------------------------
 - Select ```index.html``` to start the app
 
-### To Use
+### Details
 
 #### Characters
 ----------------------------
