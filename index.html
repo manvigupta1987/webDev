@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<div class="container">
-		<section>
-			<div class="player-text">
-				<h1>Choose Player</h1>
-				<div class="players">
-					<button class="choose-btn"><img src="img/char-cat-girl.png"></button>
-					<button class="choose-btn"><img src="img/char-horn-girl.png"></button>
-					<button class="choose-btn"><img src="img/char-pink-girl.png"></button>
-					<button class="choose-btn"><img src="img/char-princess-girl.png"></button>
-					<button class="choose-btn"><img src="img/char-boy.png"></button>
-				</div>
+		<section class="player-section">
+			<div class="players">
+				<button class="choose-btn"><img src="img/char-cat-girl.png"></button>
+				<button class="choose-btn"><img src="img/char-horn-girl.png"></button>
+				<button class="choose-btn"><img src="img/char-pink-girl.png"></button>
+				<button class="choose-btn"><img src="img/char-princess-girl.png"></button>
+				<button class="choose-btn"><img src="img/char-boy.png"></button>
 			</div>
+		</section>
+		<section class="score-panel">
+			<ul class="life">
+				<li><i class="fa fa-heart" ></i></li>
+				<li><i class="fa fa-heart"></i></li>
+				<li><i class="fa fa-heart"></i></li>
+			</ul>
+			<div class="panel-right"> Level : <span id="timer">0</span></div>
 		</section>
 		<canvas id="myCanvas" width="505" height="606"></canvas>
 		<div class="instructions">

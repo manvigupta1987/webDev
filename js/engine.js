@@ -78,8 +78,8 @@ var Engine = (function(global) {
     function update(dt) {
         if(!isGamePause){
             updateEntities(dt);
+            checkCollisions();
         }
-        // checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -94,6 +94,49 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+    }
+
+    function checkCollisions(){
+        allEnemies.forEach(function(enemy){
+            if((enemy.x < player.x+75 && enemy.x > player.x-75) &&
+               (enemy.y > player.y - 75 && enemy.y < player.y + 75)) {
+                console.log("crashed");
+                player.resetPosition();
+                reduceLife();
+            }
+        });
+    }
+
+function reduceLife(){
+    if(player.life > 0)
+    {
+        player.life = player.life-1;
+        let lifeIcons = document.querySelectorAll('.fa-heart');
+        lifeIcons[lifeIcons.length -1].className = "fa fa-heart-o";
+    }else {
+        isGamePause = true;
+        swal({
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+                title: "Game Over!!! You lost the Game",
+                text: `Your score is `,
+                icon: "success",
+                buttons: {
+                    cancel: "Close",
+                    success: {
+                        text: "Play Again!",
+                        value: true,
+                        closeModal: true,
+                    },
+                },
+            })
+            .then(function (value) {
+                if(value){
+                   init();
+                   isGamePause = false;
+               }
+            });
+    }
     }
 
     /* This function initially draws the "game level", it will then call
@@ -170,6 +213,14 @@ var Engine = (function(global) {
         });
         allEnemies.push(new Enemy(-101, (60+ Math.floor(Math.random() * 100))));
         player = new Player(202, 393);
+
+        resetLifes();
+    }
+
+    function resetLifes(){
+         document.querySelectorAll('.life li').forEach(e =>{
+            e.firstElementChild.className = "fa fa-heart";
+        });
     }
 
     /* Go ahead and load all of the img we know we're going to need to

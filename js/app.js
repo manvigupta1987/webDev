@@ -6,8 +6,8 @@ let isGamePause = false;
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [];
-var player;
+let allEnemies = [];
+let player;
 
 
 var Enemy = function(x, y) {
@@ -36,11 +36,14 @@ Enemy.prototype.update = function(dt) {
 
     var width = 171;
     var height = 101 ;
-    if(((this.x < player.x + 75) && (this.x > player.x - 75)) &&
-        (this.y > player.y - 75 && this.y < player.y + 75)) {
-        console.log("crashed");
-        player.resetPosition();
-    }
+
+    //checks for the collsion with the enemey.
+    // if(((this.x < player.x + 75) && (this.x > player.x - 75)) &&
+    //     (this.y > player.y - 75 && this.y < player.y + 75)) {
+    //     console.log("crashed");
+    //     player.resetPosition();
+    //     player.reduceLife();
+    // }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -55,6 +58,7 @@ var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'img/char-boy.png';
+    this.life = 3;
 }
 
 Player.prototype.update = function() {
@@ -99,12 +103,7 @@ Player.prototype.handleInput = function(keyCode) {
         }else if(keyCode === 'space'){
             isGamePause = true;
         }
-    }else{
-        if (keyCode === 'space') {
-            isGamePause = false;
-        }
     }
-
 };
 
 
@@ -116,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function(){
             37: 'left',
             38: 'up',
             39: 'right',
-            40: 'down',
-            32: 'space'
+            40: 'down'
         };
         player.handleInput(allowedKeys[e.keyCode]);
     });
