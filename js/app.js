@@ -1,7 +1,10 @@
 // Enemies our player must avoid
 
 let level = 1;
-let MAX_LEVEL = 10;
+const MAX_LEVEL = 10;
+const WATER_POINTS = 2;
+const scoreEl = document.querySelector("#score-id");
+const buttons = document.querySelector(".players");
 let isGamePause = false;
 
 // Now instantiate your objects.
@@ -33,19 +36,9 @@ Enemy.prototype.update = function (dt) {
     this.x = this.x + (this.speed * dt);
     if (this.x > 502) {
         this.x = -90;
+        //multiplying the speed with the level and generating the random value so that speed can be increased with levels.
         this.speed = 100 + (Math.floor(Math.random() * 20) + 20) * level;
     }
-
-    var width = 171;
-    var height = 101;
-
-    //checks for the collsion with the enemey.
-    // if(((this.x < player.x + 75) && (this.x > player.x - 75)) &&
-    //     (this.y > player.y - 75 && this.y < player.y + 75)) {
-    //     console.log("crashed");
-    //     player.resetPosition();
-    //     player.reduceLife();
-    // }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -75,9 +68,14 @@ Player.prototype.update = function () {
     }
     //If the player touches the water, resets the position to initial position.
     if (this.y < 0) {
+        //resets the char position as he touches the water.
         this.resetPosition();
+        //increment the level till it reaches MAX_LEVEL as it is used to increment the speed.
         (level < MAX_LEVEL) ? level++ : level;
-        this.updateScore(2);
+
+        //if user touches the water, if gets 2 points.
+        this.updateScore(WATER_POINTS);
+        //Create a new bonus when user reaches the water.
         bonus = new Bonus();
     }
     //If the player touches the downmost of the canvas, reset the y position to initial position.
@@ -90,28 +88,34 @@ Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+//Function to reset the character's position.
 Player.prototype.resetPosition = function () {
     this.x = 202;
     this.y = 393;
 }
 
+//function to update player's score by the num.
 Player.prototype.updateScore = function (num) {
-    this.score = this.score + num;
-    document.querySelector("#score-id").textContent = this.score;
+    this.score += num;
+    scoreEl.textContent = this.score;
 }
 
+//function to handle the player position based on the user input.
 Player.prototype.handleInput = function (keyCode) {
     if (!isGamePause) {
-        if (keyCode === 'left') {
-            this.x = this.x - 101;
-        } else if (keyCode === 'up') {
-            this.y = this.y - 83;
-        } else if (keyCode === 'right') {
-            this.x = this.x + 101;
-        } else if (keyCode === 'down') {
-            this.y = this.y + 83;
-        } else if (keyCode === 'space') {
-            isGamePause = true;
+        switch(keyCode) {
+            case 'left':
+                this.x = this.x - 101;
+                break;
+            case 'up':
+                this.y = this.y - 83;
+                break;
+            case 'right':
+                this.x = this.x + 101;
+                break;
+            case 'down':
+                this.y = this.y + 83;
+                break;
         }
     }
 };
@@ -122,6 +126,8 @@ var Bonus = function () {
         'img/gem-Green.png',
         'img/gem-Orange.png'
     ];
+
+    //randomly select the gems from the array.
     let value = Math.floor(Math.random() * 3);
     this.sprite = images[value];
     this.points = 5 * value;
@@ -129,10 +135,6 @@ var Bonus = function () {
     this.x = 101 + Math.floor(Math.random() * 5);
     this.y = 62 + (83 * (Math.floor(Math.random() * 3)));
 };
-
-Bonus.prototype.update = function () {
-
-}
 
 Bonus.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -150,7 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         player.handleInput(allowedKeys[e.keyCode]);
     });
-    let buttons = document.querySelector(".players");
+    //Sets the click listener on the character buttons and extract the image src so that htmlcanvas can redraw the
+    //character based on the user click.
     buttons.addEventListener('click', (event) => {
         if (event.target.tagName.toUpperCase() === "IMG") {
             if (player !== undefined) {
