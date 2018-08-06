@@ -1,5 +1,7 @@
 // Enemies our player must avoid
 
+'use strict';
+
 let level = 1;
 const MAX_LEVEL = 10;
 const WATER_POINTS = 2;
