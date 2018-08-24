@@ -1,3 +1,4 @@
+<!-- https://github.com/udacity/ud989-cat-clicker-premium-vanilla/blob/master/js/app.js -->
 <!doctype html>
 <html>
     <head>
@@ -14,6 +15,19 @@
                 <div id="cat-list">
                     <ul class="cat-list-group"></ul>
                 </div>
+            </section>
+            <section class="admin-mode">
+              <button id="admin">Admin</button>
+              <form id="admin-form" class="form">
+                  <label for="name">Name</label>
+                  <input type="text" name="CatName" id="name">
+                  <label for="img-url">ImgUrl</label>
+                  <input type="text" name="ImgUrl" id="img-url">
+                  <label for="clicks">Clicks</label>
+                  <input type="text" name="Clicks" id="clicks">
+                  <input type="submit" name="Save" value="Submit">
+                  <input type="reset" name="Cancel" value="Cancel" id="resetBtn">
+              </form>
             </section>
             <section class="details">
                 <div class="cat-detail">

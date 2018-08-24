@@ -1,5 +1,7 @@
 $(function () {
 var model = {
+	isAdminModeEnabled : false,
+	currentCatId: '0',
 	cats: [
 	{
 		"name": "Tabby",
@@ -33,24 +35,40 @@ var octopus = {
 	init: function () {
 		listView.init();
 		catDisplayView.init();
+		catDisplayView.render();
+		adminView.init();
 	},
 	getCats: function () {
 		return model.cats;
 	},
-	getSelectedCat: function (id) {
-		return model.cats[id];
-	},
 	incrementClickCount: function (elemId) {
-		model.cats[elemId].clicks += 1;
-		catDisplayView.render(elemId);
-	},
-	getClickInfo: function (elemId) {
-		return model.cats[elemId].clicks;
+		let id = model.currentCatId;
+		model.cats[id].clicks++;
+		catDisplayView.render();
 	},
 	findClickedCat: function (catName) {
 		return model.cats.findIndex(function(cat){
 			return cat.name === catName;
 		});
+	},
+	getAdminMode: function() {
+		return model.isAdminModeEnabled;
+	},
+	setAdminMode: function (val) {
+		model.isAdminModeEnabled = val;
+	},
+	getCurrentCat: function () {
+		return model.cats[model.currentCatId];
+	},
+	setCurrentCatId: function(id){
+		model.currentCatId = id;
+	},
+	changeCatModel: function(name, imgUrl, clicks){
+		model.cats[model.currentCatId].name = name;
+		model.cats[model.currentCatId].img = imgUrl;
+		model.cats[model.currentCatId].clicks = clicks;
+		listView.render();
+		catDisplayView.render();
 	}
 };
 
@@ -68,7 +86,8 @@ var listView = {
 		this.catList.html(toAppend);
 		$('.cat-list-group-item').click(function () {
 			let id = octopus.findClickedCat(event.target.textContent);
-			catDisplayView.render(id);
+			octopus.setCurrentCatId(id);
+			catDisplayView.render();
 		});
 	}
 };
@@ -80,19 +99,45 @@ var catDisplayView = {
 		this.catImage = $('#cat-image');
 		this.clickCount = $('.count');
 		this.catImage.click (function (event) {
-			let elemId = event.target.parentElement.id;
-			octopus.incrementClickCount(elemId);
+			octopus.incrementClickCount();
 		});
-		catDisplayView.render(0);
 	},
-	render: function (id) {
-		let cat = octopus.getSelectedCat(id);
-		this.catDetail.attr("id", id);
+	render: function () {
+		let cat = octopus.getCurrentCat();
+		//this.catDetail.attr("id", id);
 		this.catName.html(cat.name);
 		this.catImage.attr("src", cat.img);
 		this.clickCount.html(cat.clicks);
 	}
 };
+
+var adminView = {
+	init: function () {
+		this.formSubmit = $('#admin-form');
+		this.reset = $('#resetBtn');
+		this.adminBtn = $('#admin');
+		this.formSubmit.addClass("hidden");
+
+		this.adminBtn.click(function () {
+			$('#admin-form').toggleClass("hidden");
+			let adminMode = octopus.getAdminMode();
+			octopus.setAdminMode(!adminMode);
+		});
+		this.formSubmit.submit(function () {
+			var values = {};
+			if($(this).val().length !== 0){
+				$.each($(this).serializeArray(), function(i, field) {
+    				values[field.name] = field.value;
+				});
+				octopus.changeCatModel(values.CatName, values.ImgUrl, values.Clicks);
+			}
+			return false;
+		});
+		this.reset.click(function () {
+			document.getElementById('admin-form').reset();
+		});
+	}
+}
 
 octopus.init();
 
