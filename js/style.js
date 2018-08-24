@@ -34,13 +34,13 @@ var octopus = {
 		listView.init();
 		catDisplayView.init();
 	},
-	getCatsInfo: function () {
+	getCats: function () {
 		return model.cats;
 	},
-	getCatInfo: function (id) {
+	getSelectedCat: function (id) {
 		return model.cats[id];
 	},
-	updateClickCount:function (elemId) {
+	incrementClickCount: function (elemId) {
 		model.cats[elemId].clicks += 1;
 		catDisplayView.render(elemId);
 	},
@@ -61,7 +61,7 @@ var listView = {
 	},
 	render:function () {
 		let toAppend = '';
-		let catArray = octopus.getCatsInfo();
+		let catArray = octopus.getCats();
 		$.each(catArray, function (index, cat) {
 			toAppend += '<li class=cat-list-group-item>' + cat.name + '</li>';
 		});
@@ -81,12 +81,12 @@ var catDisplayView = {
 		this.clickCount = $('.count');
 		this.catImage.click (function (event) {
 			let elemId = event.target.parentElement.id;
-			octopus.updateClickCount(elemId);
+			octopus.incrementClickCount(elemId);
 		});
 		catDisplayView.render(0);
 	},
 	render: function (id) {
-		let cat = octopus.getCatInfo(id);
+		let cat = octopus.getSelectedCat(id);
 		this.catDetail.attr("id", id);
 		this.catName.html(cat.name);
 		this.catImage.attr("src", cat.img);
