@@ -1,36 +1,33 @@
 $(function () {
-var catmodel = [
+var model = {
+	cats: [
 	{
-		"name": "Cat1",
-		"img": "https://s-media-cache-ak0.pinimg.com/736x/4c/a2/c1/4ca2c1d3ef5042461f5def25e68b2fa5.jpg",
+		"name": "Tabby",
+		"img": "img/Cat1.jpg",
 		"clicks": 0
 	},
 	{
-		"name": "Cat2",
-		"img": "https://lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&h=496",
+		"name": "Tiger",
+		"img": "img/Cat2.jpg",
 		"clicks": 0
 	},
 	{
-		"name": "Cat3",
-		"img": "https://s-media-cache-ak0.pinimg.com/736x/4c/a2/c1/4ca2c1d3ef5042461f5def25e68b2fa5.jpg",
+		"name": "Scaredy",
+		"img": "img/Cat3.jpg",
 		"clicks": 0
 	},
 	{
-		"name": "Cat4",
-		"img": "https://lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&h=496",
+		"name": "Shadow",
+		"img": "img/Cat4.jpg",
 		"clicks": 0
 	},
 	{
-		"name": "Cat5",
-		"img": "https://s-media-cache-ak0.pinimg.com/736x/4c/a2/c1/4ca2c1d3ef5042461f5def25e68b2fa5.jpg",
-		"clicks": 0
-	},
-	{
-		"name": "Cat6",
-		"img": "https://lh3.ggpht.com/kixazxoJ2ufl3ACj2I85Xsy-Rfog97BM75ZiLaX02KgeYramAEqlEHqPC3rKqdQj4C1VFnXXryadFs1J9A=s0#w=640&h=496",
+		"name": "Sleepy",
+		"img": "img/Cat5.jpg",
 		"clicks": 0
 	}
-];
+	]
+};
 
 var octopus = {
 	init: function () {
@@ -38,20 +35,20 @@ var octopus = {
 		catDisplayView.init();
 	},
 	getCatsInfo: function () {
-		return catmodel;
+		return model.cats;
 	},
 	getCatInfo: function (id) {
-		return catmodel[id];
+		return model.cats[id];
 	},
 	updateClickCount:function (elemId) {
-		catmodel[elemId].clicks += 1;
+		model.cats[elemId].clicks += 1;
 		catDisplayView.render(elemId);
 	},
 	getClickInfo: function (elemId) {
-		return catmodel[elemId].clicks;
+		return model.cats[elemId].clicks;
 	},
 	findClickedCat: function (catName) {
-		return catmodel.findIndex(function(cat){
+		return model.cats.findIndex(function(cat){
 			return cat.name === catName;
 		});
 	}
