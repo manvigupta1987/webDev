@@ -26,7 +26,7 @@ h2 {
   font-style: italic;
   font-weight: bold;
 }
-#cat-list .cat-group li{
+#cat-list .cat-list-group li{
 	cursor: pointer;
 	margin-top: 5px;
 }
