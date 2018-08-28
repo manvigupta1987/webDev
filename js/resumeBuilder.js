@@ -5,7 +5,6 @@ This is empty on purpose! Your code to build the resume will go here.
  /*
 This is empty on purpose! Your code to build the resume will go here.
  */
-(function(){
  var model = {
  	init: function(){
  	this.bio = {
@@ -14,26 +13,26 @@ This is empty on purpose! Your code to build the resume will go here.
  		'contacts': {
  			'mobile':"919-389-6627",
  			'email':"manvigupta1987@gmail.com",
- 			'github':"https://github.com/manvigupta1987",
- 			'LinkedIn':"https://www.linkedin.com/in/manvi-gupta/",
- 			'location':"Raleigh, North Carolina"
+ 			'github':"manvigupta1987",
+ 			'LinkedIn':"manvi-gupta",
+ 			'location':"Raleigh, NC"
  		},
- 		'welcomeMessage':"Thank you for your visiting my resume page!!",
- 		'skills':['HTML', 'CSS', 'JavaScript', 'jQuery'],
+ 		'welcomeMessage':"An experienced software engineer efficient in different coding languages including Java, C, Android technologies and exposed to a wide range of development practices. I am a hustler and a passionate android developer. I enjoy building efficient software and learning new technologies and tools. I am looking for a Software Engineering position where I may use well-honed skills in planning, coding, and testing in order to develop state-of-the-art software.",
+ 		'skills':['AEM','Sling','Slightly','Groovy','HTML', 'CSS', 'JavaScript', 'jQuery'],
  		'biopic': "images/fry.jpg"
  	},
  	this.work = {
  		'jobs': [{
- 			'employer': 'IciDigital',
+ 			'employer': 'iCiDigital',
             'title': 'Software Consultant',
-            'location': 'Raleigh, North Carolina',
+            'location': 'Raleigh, NC',
             'dates': '2018-Present',
             'description': 'Resonsible for building customer site using AEM. Design and build AEM components, AEM targeting etc.'
  		},{
             'employer': 'Duke University',
             'title': 'Computer Engineer, Contractor',
-            'location': 'Raleigh, North Carolina',
-            'dates': '2017',
+            'location': 'Raleigh, NC',
+            'dates': 'Nov 2017-Jan 2018',
             'description': 'Designed an android app used for monitoring the users posture'
         }]
  	},
@@ -47,12 +46,17 @@ This is empty on purpose! Your code to build the resume will go here.
                 'title': 'Memory Game',
                 'dates': '2018',
                 'description': 'A game where user has to remember the icons and match with the other icon to score a point',
-                'images': ['images/meomory1.png', 'images/memory2.png']
+                'images': ['images/memory1.png', 'images/memory2.png']
             }, {
-                'title': 'Mobile Portfolio',
+                'title': 'Portfolio Site',
                 'dates': '2018',
                 'description': 'Optimizing a provided website with a number of performance - related issues. Achieving a target PageSpeed score and runs at 60 frames per second. ',
-                'images': ['images/websiteoptimization.png']
+                'images': ['images/portfolio1.png', 'images/portfolio2.png']
+            }, {
+                'title': 'Pixel Art Maker',
+                'dates': '2018',
+                'description': 'A game which allows you to select desired height and width to make a grid and you can fill each grid with your favourite colors',
+                'images': ['images/pixelart1.png', 'images/pixelart2.png']
             }]
         },
     this.education = {
@@ -105,12 +109,21 @@ var octopus = {
 	},
     getWorkData: function(){
         return model.work;
+    },
+    getProjectsData: function() {
+        return model.projects;
+    },
+    getEducationData: function() {
+        return model.education;
     }
 }
 var view = {
 	init: function(){
 		this.renderBio();
         this.renderWork();
+        this.renderProjects();
+        this.renderEducation();
+        this.renderGoogleMap();
 	},
 	renderBio: function(){
 		let topContacts = $('#topContacts');
@@ -120,18 +133,18 @@ var view = {
 		let formatedName = HTMLheaderName.replace(DATA, bioData.name);
 		let formatedBioPic = HTMLbioPic.replace(DATA, bioData.biopic);
 		let formatedRole = HTMLheaderRole.replace(DATA, bioData.role);
-		header.prepend(formatedBioPic, formatedName,formatedRole);
+		header.prepend(formatedName,formatedRole);
 
 		if(bioData.contacts){
-			if(bioData.contacts.email){
+			if(bioData.contacts.mobile){
+                let formatedMobile = HTMLmobile.replace(DATA, bioData.contacts.mobile);
+                topContacts.append(formatedMobile);
+                footerContacts.append(formatedMobile);
+            }
+            if(bioData.contacts.email){
 				let formatedEmail = HTMLemail.replace(DATA, bioData.contacts.email);
 				topContacts.append(formatedEmail);
 				footerContacts.append(formatedEmail);
-			}
-			if(bioData.contacts.mobile){
-				let formatedMobile = HTMLmobile.replace(DATA, bioData.contacts.mobile);
-				topContacts.append(formatedMobile);
-				footerContacts.append(formatedMobile);
 			}
 			if(bioData.contacts.LinkedIn){
 				let formatedLink = HTMLLinkedin.replace(DATA, bioData.contacts.LinkedIn);
@@ -149,6 +162,7 @@ var view = {
 				footerContacts.append(formatedGit);
 			}
 		}
+        header.append(formatedBioPic);
 		let formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bioData.welcomeMessage);
 		header.append(formattedWelcomeMsg);
 
@@ -163,22 +177,67 @@ var view = {
     renderWork: function(){
         let work = octopus.getWorkData();
         if(work.jobs.length > 0){
-            work.jobs.forEach(function(job, i){
+            work.jobs.forEach(function(job, i) {
                 $("#workExperience").append(HTMLworkStart);
                 let formatedEmployer = HTMLworkEmployer.replace(DATA, job.employer),
                     formattedTitle = HTMLworkTitle.replace(DATA, job.title);
                 $(".work-entry:last").append(formatedEmployer + formattedTitle);
-                var formattedWorkDates = HTMLworkDates.replace("%data%", job.dates);
-            $(".work-entry:last").append(formattedWorkDates);
-            var formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
-            $(".work-entry:last").append(formattedWorkLocation);
-            var formattedWorkDescription = HTMLworkDescription.replace("%data%", job.description);
-            $(".work-entry:last").append(formattedWorkDescription);
-
+                let formattedWorkDates = HTMLworkDates.replace("%data%", job.dates);
+                $(".work-entry:last").append(formattedWorkDates);
+                let formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
+                $(".work-entry:last").append(formattedWorkLocation);
+                let formattedWorkDescription = HTMLworkDescription.replace("%data%", job.description);
+                $(".work-entry:last").append(formattedWorkDescription);
             });
-
         }
+    },
+    renderProjects: function() {
+        let projectData = octopus.getProjectsData();
+        if(projectData.projects.length>0){
+            projectData.projects.forEach( function(project, i) {
+                $('#projects').append(HTMLprojectStart);
+                let formattedProjectName = HTMLprojectTitle.replace(DATA, project.title);
+                $('.project-entry:last').append(formattedProjectName);
+                let formatedDates = HTMLprojectDates.replace(DATA, project.dates);
+                $('.project-entry:last').append(formatedDates);
+                let formatedDes = HTMLprojectDescription.replace(DATA, project.description);
+                $('.project-entry:last').append(formatedDes);
+                if(project.images.length > 0){
+                    project.images.forEach( function(image, i) {
+                        let formatedImage = HTMLprojectImage.replace(DATA, image);
+                        $('.project-entry:last').append(formatedImage);
+                    });
+                }
+            });
+        }
+    },
+    renderEducation: function() {
+        let eduData = octopus.getEducationData();
+        if(eduData.schools.length > 0) {
+            eduData.schools.forEach(function(school, i){
+                $('#education').append(HTMLschoolStart);
+                let formattedHTMLschoolName = HTMLschoolName.replace("%data%", school.name),
+                    formattedHTMLschoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
+                $('.education-entry:last').append(formattedHTMLschoolName + formattedHTMLschoolDegree );
+                $('.education-entry:last').append(HTMLschoolDates.replace(DATA,school.dates));
+                $('.education-entry:last').append(HTMLschoolLocation.replace(DATA,school.location));
+                $('.education-entry:last').append(HTMLschoolMajor.replace(DATA,school.majors));
+            });
+        }
+        if(eduData.onlineCourses.length > 0) {
+            $('#education').append(HTMLonlineClasses);
+            eduData.onlineCourses.forEach(function(course, i){
+                $('#education').append(HTMLschoolStart);
+                $('.education-entry:last').append(HTMLonlineTitle.replace(DATA,course.title));
+                $('.education-entry:last').append(HTMLonlineSchool.replace(DATA,course.school));
+                $('.education-entry:last').append(HTMLonlineDates.replace(DATA,course.date));
+                $('.education-entry:last').append(HTMLonlineURL.replace(DATA,course.url));
+            });
+        }
+    },
+    renderGoogleMap: function() {
+        $('#mapDiv').append(googleMap);
     }
+
 };
 octopus.init();
-})();
