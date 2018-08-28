@@ -42,12 +42,12 @@ This is empty on purpose! Your code to build the resume will go here.
                 'title': 'Classic Arcade Game Clone',
                 'dates': '2018',
                 'description': 'Recreating the classic arcade game Frogger and adding a number of entities to the game including the player characters and enemies. Developing with Object-Oriented JavaScript and HTML5 Canvas.',
-                'images': ['images/arcadegame.png']
+                'images': ['images/arcade1.png', 'images/arcade2.png']
             }, {
                 'title': 'Memory Game',
                 'dates': '2018',
                 'description': 'A game where user has to remember the icons and match with the other icon to score a point',
-                'images': ['images/neighborhoodmap.png']
+                'images': ['images/meomory1.png', 'images/memory2.png']
             }, {
                 'title': 'Mobile Portfolio',
                 'dates': '2018',
