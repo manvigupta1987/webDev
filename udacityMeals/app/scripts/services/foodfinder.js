@@ -19,4 +19,9 @@ angular.module('udacityMeals')
     		vm.menuItems = data;
     	}
     });
+
+    this.getItem = function(id) {
+    	var menuItemFile = '/menu/' + id + '.json';
+    	return $.get(menuItemFile);
+    };
   });

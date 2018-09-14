@@ -2,7 +2,7 @@
 <div class="items-container" ng-repeat="item in menu.items">
 	<div class="col">
 		<img class="item__image" ng-src="images/{{item.img}}" alt="{{item.name}}">
-		<h4>{{item.name}}</h4>
+		<h4><a ui-sref="item({id:item.id})">{{item.name}}</a></h4>
 		<p>Rating:{{item.rating}} <span ng-if="item.rating > 4.0" ng-class="{highlight: item.rating > 4.5}">- People love this Item !!</span></p>
 		<button ng-click="menu.increment(item)">+</button>
 		<button ng-click="menu.decrement(item)">-</button>

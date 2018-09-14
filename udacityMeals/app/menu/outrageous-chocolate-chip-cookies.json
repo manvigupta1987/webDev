@@ -1,0 +1,14 @@
+{
+  "id": "outrageous-chocolate-chip-cookies",
+  "name": "Outrageous Chocolate Chip Cookies",
+  "img": "yeoman.png",
+  "url": "http://allrecipes.com/recipe/10141/outrageous-chocolate-chip-cookies/",
+  "description": "A great combination of chocolate chips, oatmeal, and peanut butter.",
+  "rating": 4.5,
+  "calories": 207,
+  "reviews": [
+    "Delicious. I used reduced fat chunky peanut butter and it was great",
+    "Very good, lots of flavor.",
+    "The cookies were dry, not chewy or soft."
+  ]
+}

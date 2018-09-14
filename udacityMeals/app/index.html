@@ -50,7 +50,7 @@
     ng-include is the another directive which is used to include the files. -->
     <div class="container">
       <div ng-include="'views/order.html'" ng-controller="OrderCtrl as order"></div>
-      <div ng-include="'views/menu.html'" ng-controller="MenuCtrl as menu"></div>
+      <div ui-view></div>
     </div>
 
     <div class="footer">
@@ -64,6 +64,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -73,6 +74,7 @@
         <script src="scripts/services/foodfinder.js"></script>
         <script src="scripts/services/ordermanager.js"></script>
         <script src="scripts/controllers/order.js"></script>
+        <script src="scripts/controllers/item.js"></script>
         <!-- endbuild -->
 </body>
 </html>

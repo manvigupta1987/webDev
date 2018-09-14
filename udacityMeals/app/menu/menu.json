@@ -1,20 +1,20 @@
  [
   		{
-  			"id" : "strawberry-pudding",
-  			"name" : "Strawberry Pudding",
-  			"img" : "yeoman.png",
-  			"rating" : 5
-  		},
-  		{
-  			"id" : "chicken-pudding",
-  			"name" : "Chicken Pudding",
+  			"id" : "creamy-rice-pudding",
+  			"name" : "Creamy Rice Pudding",
   			"img" : "yeoman.png",
   			"rating" : 4.5
   		},
   		{
-  			"id" : "ham-goat-pudding",
-  			"name" : "Ham Goat Pudding",
+  			"id" : "double-layer-pumpkin-cheesecake",
+  			"name" : "Double Layer Pumpkin Cheesecake",
   			"img" : "yeoman.png",
-  			"rating" : 4
+  			"rating" : 5
+  		},
+  		{
+  			"id" : "outrageous-chocolate-chip-cookies",
+  			"name" : "Outrageous Chocolate Chip Cookies",
+  			"img" : "yeoman.png",
+  			"rating" : 4.5
   		}
   ]

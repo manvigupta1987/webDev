@@ -1,0 +1,14 @@
+{
+  "id": "creamy-rice-pudding",
+  "name": "Creamy Rice Pudding",
+  "img": "yeoman.png",
+  "url": "http://allrecipes.com/recipe/24059/creamy-rice-pudding/",
+  "description": "A creamy pudding that's healthy and delicious.",
+  "rating": 4.5,
+  "calories": 366,
+  "reviews": [
+    "I havent tasted rice pudding this good since I was a little girl.",
+    "Horrible! Was not as creamy as I would have hoped for.",
+    "This was fantastic! Made it when we had a movie and games night and it was great."
+  ]
+}

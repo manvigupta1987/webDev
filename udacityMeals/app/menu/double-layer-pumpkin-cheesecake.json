@@ -1,0 +1,14 @@
+{
+  "id": "double-layer-pumpkin-cheesecake",
+  "name": "Double Layer Pumpkin Cheesecake",
+  "img": "yeoman.png",
+  "url": "http://allrecipes.com/recipe/13477/double-layer-pumpkin-cheesecake/",
+  "description": "A great alternative to pumpkin pie, especially for those cheesecake fans out there. Serve topped with whipped cream.",
+  "rating": 5,
+  "calories": 426,
+  "reviews": [
+    "This cheesecake tasted just like the pumpkin cheesecake we used to serve at a 5 star restaurant.",
+    "Have to admit I'm flummoxed by all the rave reviews. I love pumpkin and I love cheesecake but this didn't do it for me. It was ok. That's about it.",
+    "terrible.. u couldnt taste the pumpkin."
+  ]
+}
