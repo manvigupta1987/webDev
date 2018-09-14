@@ -11,31 +11,19 @@
 //controller lives inside the module. controller is the constructor function, properties of the
 //constructor function can be used in the template.
 angular.module('udacityMeals')
-  .controller('MenuCtrl', function () {
-  	this.items = [
-  		{
-  			id : 'strawberry-pudding',
-  			name : 'Strawberry Pudding',
-  			img : 'yeoman.png',
-  			rating : 5
-  		},
-  		{
-  			id : 'chicken-pudding',
-  			name : 'Chicken Pudding',
-  			img : 'yeoman.png',
-  			rating : 4.5
-  		},
-  		{
-  			id : 'ham-goat-pudding',
-  			name : 'Ham Goat Pudding',
-  			img : 'yeoman.png',
-  			rating : 4
-  		}
-  	];
-  	this.increment = function(item){
-  		item.rating = ((item.rating*10) + 1)/10;
-  	};
-  	this.decrement = function(item) {
-  		item.rating = ((item.rating*10) - 1)/10;
-  	};
-  });
+//service foodFinder is injected into the controller. To use the service controller needs to store
+//service i.e menu
+  .controller('MenuCtrl', ['foodFinder', function (menu) {
+    var vm = this;
+
+    menu.getMenu().then(function(data){
+      vm.items = data;
+    });
+    this.increment = function(item){
+      item.rating = ((item.rating*10) + 1)/10;
+    };
+    this.decrement = function(item) {
+      item.rating = ((item.rating*10) - 1)/10;
+    };
+  }]);
+
