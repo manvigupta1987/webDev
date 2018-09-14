@@ -1,0 +1,16 @@
+<div class="row">
+<div class="items-container" ng-repeat="item in menu.items">
+	<div class="col">
+		<img class="item__image" ng-src="images/{{item.img}}" alt="{{item.name}}">
+		<h4>{{item.name}}</h4>
+		<p>Rating:{{item.rating}} <span ng-if="item.rating > 4.0" ng-class="{highlight: item.rating > 4.5}">- People love this Item !!</span></p>
+		<button ng-click="menu.increment(item)">+</button>
+		<button ng-click="menu.decrement(item)">-</button>
+		<p>Image:{{item.img}} </p>
+		<p>
+			<textarea ng-model="item.newReview" name="item.review" rows="3" cols="40"></textarea>
+		</p>
+		<p> {{item.newReview}} <span ng-if="!item.newReview">Why not write a review?</p>
+	</div>
+</div>
+</div>
