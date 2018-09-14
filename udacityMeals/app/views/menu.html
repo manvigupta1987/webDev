@@ -7,6 +7,14 @@
 		<button ng-click="menu.increment(item)">+</button>
 		<button ng-click="menu.decrement(item)">-</button>
 		<p>Image:{{item.img}} </p>
+		<div class="well">
+			<select ng-model="item.meal">
+				<option value="breakfast">Breakfast</option>
+				<option value="lunch">Lunch</option>
+				<option value="dinner">Dinner</option>
+			</select>
+			<button ng-click="menu.chooseItem(item.meal, item.name)">Select Item</button>
+		</div>
 		<p>
 			<textarea ng-model="item.newReview" name="item.review" rows="3" cols="40"></textarea>
 		</p>

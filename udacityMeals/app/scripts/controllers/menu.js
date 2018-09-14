@@ -13,17 +13,16 @@
 angular.module('udacityMeals')
 //service foodFinder is injected into the controller. To use the service controller needs to store
 //service i.e menu
-  .controller('MenuCtrl', ['foodFinder', function (menu) {
-    var vm = this;
-
-    menu.getMenu().then(function(data){
-      vm.items = data;
-    });
+  .controller('MenuCtrl', ['foodFinder','orderManager', function (menu, orderManager) {
+    this.items = menu.menuItems;
     this.increment = function(item){
       item.rating = ((item.rating*10) + 1)/10;
     };
     this.decrement = function(item) {
       item.rating = ((item.rating*10) - 1)/10;
+    };
+    this.chooseItem = function(meal, name){
+      orderManager.chooseMenuOption(meal, name);
     };
   }]);
 
