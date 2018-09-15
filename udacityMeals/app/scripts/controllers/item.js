@@ -10,6 +10,7 @@
 angular.module('udacityMeals')
   .controller('ItemCtrl', ['$stateParams', 'foodFinder', function($stateParams, foodFinder) {
   	var vm = this;
+  	//id can be fetched using the stateParams.
   	foodFinder.getItem($stateParams.id).then(function(data) {
       vm.data = data;
     });
