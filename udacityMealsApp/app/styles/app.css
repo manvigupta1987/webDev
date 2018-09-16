@@ -7,9 +7,13 @@
 .items-container .menu-item {
   list-style: none;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
 }
 
 .items-container img {
-  max-width: 350px;
+  max-width: 300px;
   border-radius: 4px;
+  align-items: center;
 }

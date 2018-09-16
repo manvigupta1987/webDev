@@ -13,6 +13,7 @@ Router.map(function() {
   //if you want to have different route for the menu, for example : legos, you define like this.
   //this.route('menu', { path: '/legos' });
   // this will use the url as /legos and template as menu.hbs
+  this.route('item', { path: '/item/:item_name' });
 });
 
 export default Router;
