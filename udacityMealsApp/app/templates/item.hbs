@@ -1,5 +1,22 @@
-<h4>Pear and Goat Cheese Salad</h4>
-<img src="/images/pear-and-goat-cheese-salad.jpg" alt="Pear and Goat Cheese Salad">
-<p>3.9</p>
-<p>Salad with pears and goat cheese</p>
+
+<h4>{{model.name}}</h4>
+<img src="/menu/images/{{model.img}}" alt="Pear and Goat Cheese Salad">
+<p>{{model.rating}}</p>
+<p>{{model.name}}</p>
+<p><a href="/item/{{model.id}}/nutrition">Nutrition</a>{{#link-to 'item.nutrition'}}{{/link-to}}</p>
 {{outlet}}
+
+
+{{!-- HandleBars template engine --}}
+{{!-- {{#each model as |item|}}
+	<section class="color-group {{item.color}}-bricks">
+		<h2>{{item.color}}</h2>
+ 		{{#each item.bricks as |brick|}}
+  			<div class="col-sm-4 well {{if item.onSale 'on-sale' ''}}">
+    			<p class="brick-size">Size: {{brick.size}}</p>
+    			<p class="brick-quantity">Quantity: {{brick.quantity}}</p>
+ 			</div>
+		{{/each}}
+	</section>
+{{/each}}
+{{outlet}} --}}

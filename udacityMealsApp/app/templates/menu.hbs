@@ -1,26 +1,15 @@
+{{!-- you can use log model to log the data object. --}}
 Who's hungry
 
 <ul class="items-container">
+	{{#each model as |item|}}
 	<li class="menu-item">
-		<h3>Pear and Goat Cheese Salad</h3>
+		<h3>{{item.name}}</h3>
 		<figure>
-			<img src="images/pear-and-goat-cheese-salad.jpg" alt="Pear and Goat Cheese Salad">
-			<figcaption><a href="/item/pear-and-goat-cheese-salad">Details</a></figcaption>
+			<img src="menu/images/{{item.img}}" alt={{item.name}}>
+			<figcaption><a href="/item/{{item.id}}">Details</a>{{#link-to 'item' item.id}}{{/link-to}}</figcaption>
 		</figure>
 	</li>
-	<li class="menu-item">
-		<h3>Salmon Couscous and Arugula Salad</h3>
-		<figure>
-			<img src="images/salmon-couscous-and-arugula-salad.jpg" alt="Salmon Couscous and Arugula Salad">
-			<figcaption><a href="/item/salmon-couscous-and-arugula-salad">Details</a></figcaption>
-		</figure>
-	</li>
-	<li class="menu-item">
-		<h3>Greek Salad With Chicken</h3>
-		<figure>
-			<img src="images/greek-salad-with-chicken.jpg" alt="Greek Salad With Chicken">
-			<figcaption><a href="/item/greek-salad-with-chicken">Details</a></figcaption>
-		</figure>
-	</li>
+	{{/each}}
 </ul>
 {{outlet}}

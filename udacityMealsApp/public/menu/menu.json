@@ -1,0 +1,23 @@
+[
+  {
+      "id": "salmon-couscous-and-arugula-salad",
+      "name": "Salmon Couscous & Arugula Salad",
+      "img": "salmon-couscous-and-arugula-salad.jpg",
+      "source": "https://www.eatclub.com/s/dish/Salmon-Couscous/",
+      "photographer": "Karolina"
+  },
+  {
+      "id": "greek-salad-with-chicken",
+      "name": "Greek Salad with Chicken",
+      "img": "greek-salad-with-chicken.jpg",
+      "source": "https://www.eatclub.com/s/dish/greek-chicken-salad-gsw/",
+      "photographer": ""
+  },
+  {
+      "id": "pear-and-goat-cheese-salad",
+      "name": "Pear and Goat Cheese Salad",
+      "img": "pear-and-goat-cheese-salad.jpg",
+      "source": "https://www.eatclub.com/s/dish/Pear-Goat-Cheese/",
+      "photographer": ""
+  }
+]
