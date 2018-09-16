@@ -1,9 +1,17 @@
 <h3>{{food.name}}</h3>
 <figure>
 	<img src="menu/images/{{food.img}}" alt={{food.name}}>
+	<div>
+		{{!-- target.value is the value which is selected by the user. --}}
+		<select onchange={{action "changeCategory" value="target.value"}}>
+			<option value="breakfast">Breakfast</option>
+			<option value="lunch">Lunch</option>
+			<option value="dinner">Dinner</option>
+		</select>
+		<button {{action 'chooseItem' food.name}}>Select Item</button>
+	</div>
 	<figcaption>
-		<a href="/item/{{food.id}}">Details</a>{{#link-to 'item' food.id}}{{/link-to}}
+		{{#link-to 'item' food.id}}Details{{/link-to}}
 	</figcaption>
 </figure>
-
 {{yield}}

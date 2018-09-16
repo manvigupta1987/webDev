@@ -1,6 +1,14 @@
 import Component from '@ember/component';
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
-	orderManager: Ember.inject.service('order-manager')
+export default Component.extend({
+	orderManager: service('order-manager'),
+	actions: {
+		remove(day, menuCate){
+			this.get('orderManager').removeMenuItem(day, menuCate);
+		},
+		setDayTo(day){
+			this.get('orderManager').setSelectedDay(day);
+		}
+	}
 });

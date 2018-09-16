@@ -3,15 +3,25 @@
 		Select food for {{orderManager.selectedDay}}
 	</div>
 	{{#each-in orderManager.menuSelection as |day menuOrder|}}
-	<div>
+	<div {{action 'setDayTo' day}}>
 		{{day}}
 		<dl>
 			<dt>Breakfast</dt>
-			<dd>{{menuOrder.breakfast}}</dd>
+			<dd>
+			{{#if menuOrder.breakfast}}
+				{{menuOrder.breakfast}}<span class="remove-item" {{action 'remove' day 'breakfast'}}>&#10006;</span>
+			{{/if}}
+			</dd>
 			<dt>Lunch</dt>
-			<dd>{{menuOrder.lunch}}</dd>
+			<dd>{{#if menuOrder.lunch}}
+				{{menuOrder.lunch}}<span class="remove-item" {{action 'remove' day 'lunch'}}>&#10006;</span>
+				{{/if}}
+			</dd>
 			<dt>Dinner</dt>
-			<dd>{{menuOrder.dinner}}</dd>
+			<dd>{{#if menuOrder.dinner}}
+				{{menuOrder.dinner}}<span class="remove-item" {{action 'remove' day 'dinner'}}>&#10006;</span>
+				{{/if}}
+			</dd>
 		</dl>
 	</div>
 	{{/each-in}}
