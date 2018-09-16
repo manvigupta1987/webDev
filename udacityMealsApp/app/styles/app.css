@@ -4,7 +4,7 @@
   justify-content: space-around;
 }
 
-.items-container .menu-item {
+.items-container li {
   list-style: none;
   text-align: center;
   margin-left: auto;

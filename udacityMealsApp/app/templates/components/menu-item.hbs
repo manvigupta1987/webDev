@@ -1,0 +1,9 @@
+<h3>{{food.name}}</h3>
+<figure>
+	<img src="menu/images/{{food.img}}" alt={{food.name}}>
+	<figcaption>
+		<a href="/item/{{food.id}}">Details</a>{{#link-to 'item' food.id}}{{/link-to}}
+	</figcaption>
+</figure>
+
+{{yield}}
