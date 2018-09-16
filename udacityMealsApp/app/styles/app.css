@@ -17,3 +17,23 @@
   border-radius: 4px;
   align-items: center;
 }
+
+.order-tracker div{
+  text-align: center;
+}
+
+.order-tracker {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.order-tracker .active {
+  border: 1px solid red;
+}
+
+.order-tracker .remove-item {
+  color: red;
+  cursor: pointer;
+}
