@@ -163,22 +163,26 @@ createRestaurantHTML = (restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
+  const divTag = document.createElement('div');
+  divTag.className = 'restaurant-text';
+  li.append(divTag);
+
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
-  li.append(name);
+  divTag.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
+  divTag.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
-  li.append(address);
+  divTag.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  divTag.append(more)
 
   return li
 }
@@ -186,18 +190,18 @@ createRestaurantHTML = (restaurant) => {
 /**
  * Add markers for current restaurants to the map.
  */
-addMarkersToMap = (restaurants = self.restaurants) => {
-  restaurants.forEach(restaurant => {
-    // Add marker to the map
-    const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
-    marker.on("click", onClick);
-    function onClick() {
-      window.location.href = marker.options.url;
-    }
-    self.markers.push(marker);
-  });
+// addMarkersToMap = (restaurants = self.restaurants) => {
+//   restaurants.forEach(restaurant => {
+//     // Add marker to the map
+//     const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.newMap);
+//     marker.on("click", onClick);
+//     function onClick() {
+//       window.location.href = marker.options.url;
+//     }
+//     self.markers.push(marker);
+//   });
 
-}
+// }
  addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
