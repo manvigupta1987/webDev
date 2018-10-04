@@ -175,7 +175,7 @@ nav h1 a {
   text-align: left;
   margin-left: 20px;
 }
-#restaurants-list li h1 {
+#restaurants-list li h2 {
   color: darkred;
   font-family: Arial,sans-serif;
   font-size: 1.5em;
