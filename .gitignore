@@ -1,1 +1,52 @@
 .DS_Store
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+version.properties
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# dotenv environment variables file
+.env
+
+# gradle extraneous files
+**/output/*
+*.iml
+*.ipr
+*.iws
+*.jar
+*.tmp
+*.vlt
+.cache
+.classpath
+.DS_Store
+.gradle
+.gradletasknamecache
+.idea
+.brackets.json
+.metadata/
+.project
+.settings
+bin/
+build/
+dist/
+install/
+omega/
+out/
+scripts/
+version.properties
+node_modules/
+npm-debug.log
+*-lock.json
