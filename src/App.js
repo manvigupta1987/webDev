@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import ListContacts from './ListContacts';
 import * as ContactsAPI from './utils/ContactsAPI'
+import CreateContact from './CreateContact'
 
 class App extends Component {
   //this state is maintained inside the component. Whenever the state changes for example: pressing the
   //remove button and delete items, react is able to manage the state.
   state = {
+    screen: 'list',
     contacts : []
   }
   componentDidMount() {
@@ -22,11 +24,17 @@ class App extends Component {
 
   render(){
     return (
-      <div>
+      <div className="app">
+      {this.state.screen === 'list' && (
         <ListContacts
           onDeleteContact={this.removeContact}
           contacts = {this.state.contacts}
+          onNavigate = {()=>{this.setState({screen: 'create'})}}
         />
+      )}
+      {this.state.screen === 'create' && (
+        <CreateContact/>
+      )}
       </div>
     )
   }
