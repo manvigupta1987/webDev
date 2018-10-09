@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ListContacts from './ListContacts';
 import * as ContactsAPI from './utils/ContactsAPI'
 import CreateContact from './CreateContact'
+import { Route } from 'react-router-dom'
 
 class App extends Component {
   //this state is maintained inside the component. Whenever the state changes for example: pressing the
   //remove button and delete items, react is able to manage the state.
   state = {
-    screen: 'list',
     contacts : []
   }
   componentDidMount() {
@@ -21,20 +21,34 @@ class App extends Component {
     }))
     ContactsAPI.remove(contact)
   }
+  createContact = (contact)=>{
+    ContactsAPI.create(contact).then(contact=>{
+      this.setState(state=>({
+        contacts: state.contacts.concat([contact])
+      }))
+    })
 
+  }
+
+  //use render method with route when you need to pass the props to the component else you can simply
+  //use component with render method.
   render(){
     return (
       <div className="app">
-      {this.state.screen === 'list' && (
+      <Route exact path="/" render={()=>(
         <ListContacts
           onDeleteContact={this.removeContact}
           contacts = {this.state.contacts}
-          onNavigate = {()=>{this.setState({screen: 'create'})}}
         />
-      )}
-      {this.state.screen === 'create' && (
-        <CreateContact/>
-      )}
+      )}/>
+      <Route path="/create" render={({history})=>(
+        <CreateContact
+          onCreateContact={(contact)=>{
+            this.createContact(contact)
+            history.push('/')
+          }}
+        />
+        )}/>
       </div>
     )
   }

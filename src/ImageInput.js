@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+//The ImageInput component is a custom <input> that dynamically reads and resizes
+//image files before submitting them to the server as data URLs. It also shows a
+//preview of the image.
+
 const readFileAsDataURL = (file) =>
   new Promise(resolve => {
     const reader = new FileReader()
