@@ -4,6 +4,7 @@ import BookSearch from './BookSearch'
 import BookLists from './BookLists'
 import * as BooksAPI from './BooksAPI'
 import sortBy from 'sort-by'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends Component {
 
@@ -14,7 +15,6 @@ class BooksApp extends Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false,
     books:[]
   }
 
@@ -39,17 +39,20 @@ class BooksApp extends Component {
     booksList.sort(sortBy('title'))
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-         <BookSearch/>
-        ) : (
+        <Route exact path="/" render={()=>(
           <BookLists
             books = {this.state.books}
             updateBookShelf = {this.updateBookDetails}
           />
-        )}
+        )}/>
+        <Route exact path="/search" render={({history})=>(
+          <BookSearch
+            updateBookShelf={this.updateBookDetails}
+            history={history}
+          />
+        )}/>
       </div>
     )
   }
 }
-
-export default BooksApp
+export default BooksApp;
