@@ -3,7 +3,7 @@ import './App.css'
 import BookSearch from './BookSearch'
 import BookLists from './BookLists'
 import * as BooksAPI from './BooksAPI'
-import PropTypes from 'prop-types'
+import sortBy from 'sort-by'
 
 class BooksApp extends Component {
 
@@ -35,6 +35,8 @@ class BooksApp extends Component {
   }
 
   render() {
+    let booksList = this.state.books
+    booksList.sort(sortBy('title'))
     return (
       <div className="app">
         {this.state.showSearchPage ? (
