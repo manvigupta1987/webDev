@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import './App.css'
 import BookSearch from './BookSearch'
 import BookLists from './BookLists'
+import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends Component {
   state = {
@@ -12,7 +13,15 @@ class BooksApp extends Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    showSearchPage: false,
+    books:[]
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books)=> {
+      console.log(books);
+      this.setState({books: books})
+    })
   }
 
   render() {
@@ -21,7 +30,9 @@ class BooksApp extends Component {
         {this.state.showSearchPage ? (
          <BookSearch/>
         ) : (
-          <BookLists/>
+          <BookLists
+            books = {this.state.books}
+          />
         )}
       </div>
     )

@@ -10,7 +10,7 @@ class BookLists extends Component{
             	</div>
             	<div className="list-books-content">
               		<div>
-                		<BookShelf/>
+                		<BookShelf books = {this.props.books}/>
               		</div>
               	</div>
             	<div className="open-search">
