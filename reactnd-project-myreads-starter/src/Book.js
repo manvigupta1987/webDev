@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 
 class Book extends Component {
 
+	changeShelf = (event) => {
+		console.log(event.target.value)
+		this.props.onChangeBookShelf(event.target.value)
+	}
+
 	render() {
 		const book = this.props.book
 		return(
@@ -13,7 +18,7 @@ class Book extends Component {
                             	backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
                         </div>
                         <div className="book-shelf-changer">
-                            <select>
+                            <select onChange={this.changeShelf} value={book.shelf}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -22,7 +27,7 @@ class Book extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="book-title">{book.title}}</div>
+                    <div className="book-title">{book.title}</div>
                     <div className="book-authors">{book.author}</div>
                 </div>
             </li>

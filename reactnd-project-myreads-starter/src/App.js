@@ -18,9 +18,21 @@ class BooksApp extends Component {
   }
 
   componentDidMount() {
+    this.getAllBooks()
+  }
+
+  getAllBooks = ()=>{
     BooksAPI.getAll().then((books)=> {
       console.log(books);
       this.setState({books: books})
+    })
+  }
+  updateBookDetails = (book, shelf)=> {
+    console.log(book.id)
+    console.log(JSON.stringify({ shelf }))
+
+    BooksAPI.update(book, shelf).then(()=>{
+      this.getAllBooks()
     })
   }
 
@@ -32,6 +44,7 @@ class BooksApp extends Component {
         ) : (
           <BookLists
             books = {this.state.books}
+            updateBookShelf = {this.updateBookDetails}
           />
         )}
       </div>
