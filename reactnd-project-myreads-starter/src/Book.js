@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 class Book extends Component {
 
 	changeShelf = (event) => {
-		console.log(event.target.value)
 		this.props.onChangeBookShelf(event.target.value)
 	}
 

@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import BookShelf from './BookShelf'
+import PropTypes from 'prop-types'
 
 class BookLists extends Component{
+	static propTypes = {
+    	books: PropTypes.array.isRequired,
+    	updateBookShelf: PropTypes.func.isRequired
+  	}
 
 	render(){
-		const books = this.props.books
+		const {books, updateBookShelf} = this.props
 		return(
 			<div className="list-books">
             	<div className="list-books-title">
@@ -17,21 +22,21 @@ class BookLists extends Component{
                 				book.shelf === "currentlyReading"
                 			))}
                 			title = "Currently Reading"
-                			onUpdateShelf = {this.props.updateBookShelf}
+                			onUpdateShelf = {updateBookShelf}
                 		/>
                 		<BookShelf
                 			books = {books.filter((book)=>(
                 				book.shelf === "read"
                 			))}
                 			title = "Read"
-                			onUpdateShelf = {this.props.updateBookShelf}
+                			onUpdateShelf = {updateBookShelf}
                 		/>
                 		<BookShelf
                 			books = {books.filter((book)=>(
                 				book.shelf === "wantToRead"
                 			))}
                 			title = "Want to Read"
-                			onUpdateShelf = {this.props.updateBookShelf}
+                			onUpdateShelf = {updateBookShelf}
                 		/>
               		</div>
               	</div>

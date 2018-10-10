@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-// import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookSearch from './BookSearch'
 import BookLists from './BookLists'
 import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types'
 
 class BooksApp extends Component {
+
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -28,9 +29,6 @@ class BooksApp extends Component {
     })
   }
   updateBookDetails = (book, shelf)=> {
-    console.log(book.id)
-    console.log(JSON.stringify({ shelf }))
-
     BooksAPI.update(book, shelf).then(()=>{
       this.getAllBooks()
     })
