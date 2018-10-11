@@ -11,8 +11,14 @@ class BookSearch extends Component{
 	updateQuery = (query)=>{
 		if(query.length >0){
 			this.setState({ query:query.trim()})
-			BooksAPI.search(query).then((books)=>{
+			BooksAPI.search(query, 10).then((books)=>{
 				if(books.length > 0){
+					books.map((book)=>{
+						console.log("booksOnMyReads" + this.props.booksOnMyReads)
+						const commBook = this.props.booksOnMyReads.find((booksOnMyRead)=>
+						booksOnMyRead.id === book.id);
+						book.shelf = commBook ? commBook.shelf : "none"
+					})
 					this.setState({books:books})
 				}
 			})
@@ -23,6 +29,7 @@ class BookSearch extends Component{
 	updateShelf = (book,shelf)=> {
 		console.log(book)
 		this.props.updateBookShelf(book, shelf)
+		this.props.history.push('/')
 	}
 
 	render(){

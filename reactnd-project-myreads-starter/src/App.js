@@ -49,6 +49,7 @@ class BooksApp extends Component {
           <BookSearch
             updateBookShelf={this.updateBookDetails}
             history={history}
+            booksOnMyReads={this.state.books}
           />
         )}/>
       </div>
