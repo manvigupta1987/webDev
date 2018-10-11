@@ -13,13 +13,13 @@ class BookSearch extends Component{
 			this.setState({ query:query})
 			BooksAPI.search(query).then((books)=>{
 				if(books.length > 0){
-					const booksWithImage = books.filter((book)=>book.imageLinks)
-					booksWithImage.map((book)=>{
+					books = books.filter((book)=>(book.imageLinks))
+					books.map((book)=>{
 							const commBook = this.props.booksOnMyReads.find((booksOnMyRead)=>
 							booksOnMyRead.id === book.id);
 							book.shelf = commBook ? commBook.shelf : "none"
 					})
-					this.setState({books:booksWithImage})
+					this.setState({books:books})
 				}
 			})
 		} else {
@@ -29,7 +29,6 @@ class BookSearch extends Component{
 	updateShelf = (book,shelf)=> {
 		console.log(book)
 		this.props.updateBookShelf(book, shelf)
-		this.props.history.push('/')
 	}
 
 	render(){

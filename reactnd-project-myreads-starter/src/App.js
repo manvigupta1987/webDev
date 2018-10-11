@@ -48,7 +48,6 @@ class BooksApp extends Component {
         <Route exact path="/search" render={({history})=>(
           <BookSearch
             updateBookShelf={this.updateBookDetails}
-            history={history}
             booksOnMyReads={this.state.books}
           />
         )}/>
