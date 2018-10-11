@@ -24,12 +24,22 @@ class BooksApp extends Component {
     this.getAllBooks()
   }
 
+  /**
+   * find all books added to the library
+   * @param none
+   */
   getAllBooks = ()=>{
     BooksAPI.getAll().then((books)=> {
       console.log(books);
       this.setState({books: books})
     })
   }
+
+  /**
+   * Change the shelf of a book or Adds it to the Library in a shelf
+   * @param {string} book object
+   * @param {string} shelf
+   */
   updateBookDetails = (book, shelf)=> {
 
     const bookIndex = this.state.books.findIndex((stateBook)=> stateBook.id === book.id);
