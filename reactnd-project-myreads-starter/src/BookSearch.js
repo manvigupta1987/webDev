@@ -11,15 +11,19 @@ class BookSearch extends Component{
 	updateQuery = (query)=>{
 		if(query.length >0){
 			this.setState({ query:query})
-			BooksAPI.search(query).then((books)=>{
-				if(books.length > 0){
-					books = books.filter((book)=>(book.imageLinks))
-					books.map((book)=>{
+			BooksAPI.search(query).then((response)=>{
+				if(response.error && response.error === "empty query") {
+					this.setState({query:query, books:[]})
+					return
+				}
+				if(response.length > 0){
+					response = response.filter((book)=>(book.imageLinks))
+					response.map((book)=>{
 							const commBook = this.props.booksOnMyReads.find((booksOnMyRead)=>
 							booksOnMyRead.id === book.id);
 							book.shelf = commBook ? commBook.shelf : "none"
 					})
-					this.setState({books:books})
+					this.setState({books:response})
 				}
 			})
 		} else {
