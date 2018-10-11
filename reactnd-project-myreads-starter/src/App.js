@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import './App.css'
+import sortBy from 'sort-by'
+import { Route } from 'react-router-dom'
+
 import BookSearch from './BookSearch'
 import BookLists from './BookLists'
 import * as BooksAPI from './BooksAPI'
-import sortBy from 'sort-by'
-import { Route } from 'react-router-dom'
+import './App.css'
+
 
 class BooksApp extends Component {
 
@@ -29,26 +31,40 @@ class BooksApp extends Component {
     })
   }
   updateBookDetails = (book, shelf)=> {
+
+    const bookIndex = this.state.books.findIndex((stateBook)=> stateBook.id === book.id);
     BooksAPI.update(book, shelf).then(()=>{
-      this.getAllBooks()
+      if(bookIndex > -1) {
+        const newBooks = this.state.books.map((stateBook)=>{
+          if(stateBook.id===book.id){
+            stateBook.shelf = shelf
+          }
+          return stateBook
+        })
+        this.setState({books:newBooks})
+      }else{
+        book.shelf = shelf
+        const newBook = this.state.books.concat([book])
+        this.setState({books: newBook})
+      }
     })
   }
 
   render() {
-    let booksList = this.state.books
-    booksList.sort(sortBy('title'))
+    let bookList = this.state.books
+    bookList.sort(sortBy('title'))
     return (
       <div className="app">
         <Route exact path="/" render={()=>(
           <BookLists
-            books = {this.state.books}
+            books = {bookList}
             updateBookShelf = {this.updateBookDetails}
           />
         )}/>
         <Route exact path="/search" render={({history})=>(
           <BookSearch
             updateBookShelf={this.updateBookDetails}
-            booksOnMyReads={this.state.books}
+            booksOnMyReads={bookList}
           />
         )}/>
       </div>
