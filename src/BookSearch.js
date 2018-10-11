@@ -17,7 +17,6 @@ class BookSearch extends Component{
 					return
 				}
 				if(response.length > 0){
-					response = response.filter((book)=>(book.imageLinks))
 					response.map((book)=>{
 							const commBook = this.props.booksOnMyReads.find((booksOnMyRead)=>
 							booksOnMyRead.id === book.id);
@@ -37,6 +36,7 @@ class BookSearch extends Component{
 	}
 
 	render(){
+
 		return (
 			<div className="search-books">
             <div className="search-books-bar">
