@@ -22,6 +22,7 @@ class BookSearch extends Component{
 							const commBook = this.props.booksOnMyReads.find((booksOnMyRead)=>
 							booksOnMyRead.id === book.id);
 							book.shelf = commBook ? commBook.shelf : "none"
+							return book
 					})
 					this.setState({books:response})
 				}
