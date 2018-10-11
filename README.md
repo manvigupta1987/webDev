@@ -21,7 +21,7 @@ cd book-tracking-app-react/reactnd-project-myreads-starter
 
 Install dependencies and run with:
 ```
-npm install.
+npm install
 npm start
 ```
 This will start the app in the default browser at localhost:3000
