@@ -16,7 +16,7 @@ Project can be built using npm or yarn. Install npm or yarn if you don't have an
 To download the project
 ```
 git clone https://github.com/manvigupta1987/webDev/tree/book-tracking-app-react
-cd book-tracking-app-react/reactnd-project-myreads-starter
+cd book-tracking-app-react
 ```
 
 Install dependencies and run with:
