@@ -4,11 +4,16 @@ import PlaceItem from './PlaceItem'
 class PlacesList extends Component {
 	state = {
 		query: '',
-		locations: []
+		locations: [],
+		suggestions: true
 	}
 
 	componentDidMount(){
 		this.setState({locations: this.props.locations})
+	}
+
+	toggleSuggestionsList = ()=> {
+		this.setState({suggestions: !this.state.suggestions})
 	}
 
 	filterPlaces = (query)=>{
@@ -38,8 +43,14 @@ class PlacesList extends Component {
 				value={this.state.query}
 				onChange={(event) => (this.filterPlaces(event.target.value))}/>
 				<ul>
-					{placeList}
+					{this.state.suggestions && placeList}
 				</ul>
+				<button
+					className="suggestionButton"
+					onClick={()=>(
+						this.toggleSuggestionsList()
+					)}>Show/Hide Suggestions
+				</button>
 			</div>
 		)
 	}
