@@ -202,7 +202,7 @@ class Map extends Component {
 					closeInfoWindow = {this.closeInfoWindow}
 					getMarkerInfo = {this.getMarkerDetails}
 				/>
-				<div id='map' style={style}></div>
+				<div id='map' role='application' style={style}></div>
 			</div>
 		)
 	}
