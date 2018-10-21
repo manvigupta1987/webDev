@@ -85,7 +85,8 @@ class Map extends Component {
             'lng': -78.84812620000002
           },
           'placeId': 'ChIJp-wS2ZztrIkRP1Xa2q30Ppo'
-        }]
+        }],
+        oldMarker: ''
 	}
 	componentDidMount () {
 		this.initMap()
@@ -120,12 +121,20 @@ class Map extends Component {
     }
 
 	openInfoWindow = (marker)=>{
+		this.closeInfoWindow()
 		this.state.infoWindow.open(this.state.map, marker)
 		this.state.infoWindow.setContent(marker.title)
+		this.toggleBounce(marker)
+		this.setState({oldMarker: marker})
+		this.state.map.panTo(marker.getPosition())
 	}
 
-	closeInfoWindow = (marker) => {
-   	 this.state.infoWindow.close()
+	closeInfoWindow = () => {
+		if(this.state.oldMarker){
+			this.toggleBounce(this.state.oldMarker)
+		}
+		this.setState({oldMarker: ''})
+   		this.state.infoWindow.close()
   	}
 
 	initMap() {
