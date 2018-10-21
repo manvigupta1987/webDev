@@ -8,7 +8,7 @@ class PlacesList extends Component {
 		suggestions: true
 	}
 
-	componentDidMount(){
+	componentWillMount(){
 		this.setState({locations: this.props.locations})
 	}
 
@@ -21,15 +21,18 @@ class PlacesList extends Component {
 		const locations = this.props.locations.map((location)=>{
 			if(location.longName.toLowerCase().indexOf(query.toLowerCase()) !== -1){
 				location.marker.setVisible(true)
+				location.visible = true
 			}else{
 				location.marker.setVisible(false)
+				location.visible = false
 			}
 			return location
 		})
 		this.setState({query, locations})
 	}
 	render(){
-		const placeList = this.state.locations.map((location) =>(
+		const {state} = this.state
+		const placeList = this.state.locations.filter((location) => location.visible).map((location) => (
 			<PlaceItem
 				key={location.placeId}
 				openInfoWindow = {this.props.openInfoWindow}
