@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PlacesList from './PlacesList'
 
 class Map extends Component {
 
@@ -123,24 +124,22 @@ class Map extends Component {
 	}
 
 	setMarkers = (map) =>{
-		const mapLocations = []
-		this.state.locations.map((location) =>{
+		const mapLocations = this.state.locations.map((location) =>{
 			const marker = new window.google.maps.Marker({
 				position: new window.google.maps.LatLng(location.position),
 				animation: window.google.maps.Animation.DROP,
 				map,
 				title:location.title
 			})
+			location.longName = `${location.title} - ${location.type}`
 			location.marker = marker
 			location.visible = true
-			mapLocations.push(location)
 			marker.addListener('click', () => {
 				this.openInfoWindow(marker)
 				this.getMarkerDetails(location)
 			})
 			return location
 		})
-
 		this.setState({locations: mapLocations})
 	}
 
@@ -196,7 +195,14 @@ class Map extends Component {
       		height: '100%'
     	}
 		return(
-			<div id='map' style={style}>
+			<div>
+				<PlacesList
+					locations={this.state.locations}
+					openInfoWindow = {this.openInfoWindow}
+					closeInfoWindow = {this.closeInfoWindow}
+					getMarkerInfo = {this.getMarkerDetails}
+				/>
+				<div id='map' style={style}></div>
 			</div>
 		)
 	}
