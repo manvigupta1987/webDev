@@ -6,13 +6,13 @@ class Map extends Component {
 		map: '',
 		infoWindow : {},
 		locations: [{
-          'title': "Carmen's Cuban Cafe & Lounge",
+          'title': "Alpaca Peruvian Chicken",
           'type': "restaurant",
           'position': {
-            'lat': 35.86226399999999,
-            'lng': -78.81819100000001
+            'lat':  35.80485055389427,
+            'lng': -78.81220078185558
           },
-          'placeId': 'ChIJ58wYqsnxrIkR35nmdWvlVzY'
+          'placeId': '536c2e5311d2c27884d6867a'
         },
         {
           'title': "Babymoon Cafe",
@@ -21,16 +21,16 @@ class Map extends Component {
             'lat': 35.8512457,
             'lng': -78.8270928
           },
-          'placeId': 'ChIJM47UNN3xrIkRQoSk4tao5x4'
+          'placeId': '4b046caff964a520105422e3'
         },
         {
-          'title': "Bad Daddy's Burger Bar",
+          'title': "Triangle Rock Club",
           'type': "restaurant",
           'position': {
-            'lat': 35.80801,
-            'lng': -78.81897750000002
+            'lat': 35.81091330934045,
+            'lng': -78.82075839631239
           },
-          'placeId': 'ChIJ6YeE-j_yrIkRlV7JL6CbplM'
+          'placeId': '4b523d80f964a520fc7127e3'
         },
         {
           'title': "Mi Cancun",
@@ -39,16 +39,16 @@ class Map extends Component {
             'lat': 35.8200653,
             'lng': -78.84567930000003
           },
-          'placeId': 'ChIJlbm9afrtrIkRBf8o160LD-s'
+          'placeId': '54ad727b498ee8be99cb04ae'
         },
         {
-          'title': "La Farm",
+          'title': "Neomonde",
           'type': "bakery",
           'position': {
-            'lat': 35.7906696,
-            'lng': -78.8274806
+            'lat': 35.8295532,
+            'lng': -78.8278588
           },
-          'placeId': 'ChIJXVEwV3vyrIkRgJmnZlguzq0'
+          'placeId': '4ada9578f964a520a82321e3'
         },
         {
           'title': "Smokey's BBQ Shack",
@@ -57,39 +57,69 @@ class Map extends Component {
             'lat': 35.8497941,
             'lng': -78.8391595
           },
-          'placeId': 'ChIJl22V7x_urIkRAVHDxziyALE'
+          'placeId': '4b50b919f964a520632f27e3'
         },
         {
-          'title': "Lugano Ristorante",
+          'title': "Chipotle Mexican Grill",
           'type': "restaurant",
           'position': {
-            'lat': 35.79994500000001,
-            'lng': -78.81612410000002
+            'lat': 35.806871394448315,
+            'lng': -78.8150586684328
           },
-          'placeId': 'ChIJn_9e-GnyrIkRkVpEDRJO320'
+          'placeId': '506775c3e4b0d7d96ba379fd'
         },
         {
-          'title': "Texas Steakhouse & Saloon",
+          'title': "Rise Biscuits and Donuts",
           'type': "restaurant",
           'position': {
-            'lat': 35.8576266,
-            'lng': -78.82137210000002
+            'lat': 35.8079038801952,
+            'lng': -78.81532165891711
           },
-          'placeId': 'ChIJBegz1sXxrIkRtnXyJrfKTrY'
+          'placeId': '55d86199498e86c4d50f529e'
         },
         {
-          'title': "Doherty's Irish Pub & Restaurant",
+          'title': "Firebirds Wood Fired Grill",
           'type': "restaurant",
           'position': {
-            'lat': 35.7885254,
-            'lng': -78.84812620000002
+            'lat': 35.807738956731896,
+            'lng': -78.81880058823674
           },
-          'placeId': 'ChIJp-wS2ZztrIkRP1Xa2q30Ppo'
+          'placeId': '51f824e88bbdcb46a582985c'
         }],
         oldMarker: ''
 	}
 	componentDidMount () {
 		this.initMap()
+	}
+
+	getMarkerDetails = (location)=> {
+		const client_secret = 'JJMYQQMQEHR34LYLCBITC3SGUG3SEPRALVZIGYQ1ZFOGJ1YF'
+		const client_id = 'DU1U3LTB3QWRNNYV5D0YTNXANUFPCDZRR3HUUI5PJU1GCV4A'
+		const foursquareUrl = `https://api.foursquare.com/v2/venues/${location.placeId}?client_id=${client_id}&client_secret=${client_secret}&v=20181018`
+
+		fetch(foursquareUrl)
+			.then((response) =>{
+				if(response.status !== 200){
+					this.state.infoWindow.setContent("No result found")
+					return
+				}
+
+				response.json().then((data) => {
+        			const { venue } = data.response
+        			console.log(venue)
+        			this.state.infoWindow.setContent(`<div class='marker-info'>
+        				<h2>${venue.name}</h2>
+        				<p><strong><em>Contact Number: </em></strong>${venue.contact.formattedPhone? venue.contact.formattedPhone : "phone number not available"}</p>
+        				<p><strong><em>hours: </em></strong>${venue.hours.status}</p>
+        				<p>${venue.rating ? '<strong><em>Rating: </em></strong>'+ venue.rating: ''}</p>
+        				<p><a href='${venue.canonicalUrl}' target='_blank'>Read more</a></p>
+        				</div>`)
+      			})
+			})
+			.catch((err) => {
+				this.state.infoWindow.setContent("No result found")
+			})
+
 	}
 
 	setMarkers = (map) =>{
@@ -106,7 +136,9 @@ class Map extends Component {
 			mapLocations.push(location)
 			marker.addListener('click', () => {
 				this.openInfoWindow(marker)
+				this.getMarkerDetails(location)
 			})
+			return location
 		})
 
 		this.setState({locations: mapLocations})

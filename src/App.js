@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Map from './Components/Map'
 import { GoogleApiWrapper } from 'google-maps-react'
