@@ -1,4 +1,4 @@
-body{
+html, body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -36,12 +36,76 @@ body{
 
 #map {
   position: fixed !important;
+  background: #ccc;
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+.place-list{
+  position: absolute;
+  z-index: 1;
+  background: transparent\9;
+  box-shadow: 3px 4px 5px #ccc;
+  width: 400px;
+}
+
+.place-item{
+  list-style: none;
+  text-align: left;
+  font-style: italic;
+  font-weight: bold;
+  padding: 5px;
+  border-bottom: 1px solid rgba(20, 204, 205, 0.80);
+  cursor: pointer;
+}
+
+.place-item:hover {
+  background: grey;
+}
+
+#input-field{
+  height: 25px;
+  width: 100%;
+  font-size: 1.4em;
+  padding: 5px;
+}
+
+.suggestionButton{
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #a9a9a9;
+  font-size: 1em;
+  transition: opacity 0.5s linear;
+}
+
+.suggestionButton:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.marker-info {
+  display: block;
+  height: 400px;
+  padding: 0;
+  margin: 0;
+}
+.marker-photo{
+  width: 100%;
+  margin-bottom: 5px;
+}
+.marker-name{
+  text-align: center;
+}
+.markerInfo {
+  margin: 0;
+  padding: 0;
+}
+@media screen and (max-width: 420px) {
+  .place-list{
+    width: 300px;
   }
-  to {
-    transform: rotate(360deg);
+  #input-field {
+    height: 15px;
+    font-size: 1em;
   }
 }
+

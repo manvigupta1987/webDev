@@ -41,8 +41,8 @@ class PlacesList extends Component {
 			/>
 		))
 		return(
-			<div className="search">
-				<input type='text' role='search' aria-labelledby='filter' id='search-field'
+			<div className="place-list">
+				<input type='text' role='search' aria-labelledby='filter' id='input-field' placeholder="Filter Places"
 				value={query}
 				onChange={(event) => (this.filterPlaces(event.target.value))}/>
 				<ul>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PlacesList from './PlacesList'
+import foursquareImg from '../images/foursquare.png'
 
 class Map extends Component {
 
@@ -109,12 +110,14 @@ class Map extends Component {
         			const { venue } = data.response
         			console.log(venue)
         			this.state.infoWindow.setContent(`<div class='marker-info'>
-        				<h2>${venue.name}</h2>
-        				<h3>${venue.location.address? venue.location.address : venue.location.formattedAddress[0]}</h3>
-        				<p><strong><em>Contact Number: </em></strong>${venue.contact.formattedPhone? venue.contact.formattedPhone : "phone number not available"}</p>
-        				<p><strong><em>hours: </em></strong>${venue.hours.status}</p>
-        				<p>${venue.rating ? '<strong><em>Rating: </em></strong>'+ venue.rating: ''}</p>
-        				<p><a href='${venue.canonicalUrl}' target='_blank'>Read more</a></p>
+        				<h2 class="marker-name">${venue.name}</h2>
+        				<img class="marker-photo" src=${venue.bestPhoto ? `${venue.bestPhoto.prefix}300x200${venue.bestPhoto.suffix}` : "no phone found" } alt="restaurant photo">
+        				<h3 class="markerInfo">${venue.location.address? venue.location.address : venue.location.formattedAddress[0]}</h3>
+        				<p class="markerInfo"><strong>Contact Number: </em></strong>${venue.contact.formattedPhone? venue.contact.formattedPhone : "phone number not available"}</p>
+        				<p class="markerInfo"><strong><em>hours: </em></strong>${venue.hours.status}</p>
+        				<p class="markerInfo">${venue.rating ? '<strong><em>Rating: </em></strong>'+ venue.rating: ''}</p>
+        				<p class="markerInfo"><a href='${venue.canonicalUrl}' target='_blank'>Read more</a></p>
+        				<img src=${foursquareImg} alt="Powered By foursquare"/>
         				</div>`)
       			})
 			})
