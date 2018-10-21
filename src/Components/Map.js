@@ -19,15 +19,6 @@ class Map extends Component {
           'placeId': '536c2e5311d2c27884d6867a'
         },
         {
-          'title': "Babymoon Cafe",
-          'type': "restaurant",
-          'position': {
-            'lat': 35.8512457,
-            'lng': -78.8270928
-          },
-          'placeId': '4b046caff964a520105422e3'
-        },
-        {
           'title': "Triangle Rock Club",
           'type': "restaurant",
           'position': {
@@ -73,31 +64,58 @@ class Map extends Component {
           'placeId': '506775c3e4b0d7d96ba379fd'
         },
         {
-          'title': "Rise Biscuits and Donuts",
+          'title': "Blaze Pizza",
           'type': "restaurant",
           'position': {
-            'lat': 35.8079038801952,
-            'lng': -78.81532165891711
+            'lat': 35.808201,
+            'lng': -78.815754
           },
-          'placeId': '55d86199498e86c4d50f529e'
+          'placeId': '54924d06498ed496ec027844'
         },
         {
-          'title': "Firebirds Wood Fired Grill",
+          'title': "Salsa Fresh Mexican Grill",
           'type': "restaurant",
           'position': {
-            'lat': 35.807738956731896,
-            'lng': -78.81880058823674
+            'lat': 35.81955957701481,
+            'lng': -78.84712907121657
           },
-          'placeId': '51f824e88bbdcb46a582985c'
+          'placeId': '4b2ea5f1f964a5203fe424e3'
         },
         {
-          'title': "Zoës Kitchen",
+          'title': "Guasaca Arepa & Salsa Grill",
           'type': "restaurant",
           'position': {
-            'lat': 35.807550771841974,
-            'lng': -78.81453724529867
+            'lat': 35.81458456976749,
+            'lng': -78.82051214986485
           },
-          'placeId': '51f824e88bbdcb46a582985c'
+          'placeId': '589667d0fc5a5f6cdac4e2f9'
+        },
+        {
+          'title': "Bad Daddy's Burger Bar",
+          'type': "restaurant",
+          'position': {
+            'lat': 35.807784153529916,
+            'lng': -78.81875570351734
+          },
+          'placeId': '529a59be11d2c01eeb1e870c'
+        },
+        {
+          'title': "Los Tres Magueyes",
+          'type': "restaurant",
+          'position': {
+            'lat': 35.85964135016202,
+            'lng': -78.82023513801217
+          },
+          'placeId': '561be1c0498e87aa738b74be'
+        },
+        {
+          'title': "BabyMoon Cafe",
+          'type': "restaurant",
+          'position': {
+            'lat': 35.85106945570956,
+            'lng': -78.82693614423596
+          },
+          'placeId': '4b046caff964a520105422e3'
         }],
         oldMarker: ''
 	}
@@ -128,7 +146,7 @@ class Map extends Component {
         				<p class="markerInfo"><strong><em>hours: </em></strong>${venue.hours ? venue.hours.status : "hours not available"}</p>
         				<p class="markerInfo">${venue.rating ? '<strong><em>Rating: </em></strong>'+ venue.rating: ''}</p>
         				<p class="markerInfo"><a href='${venue.canonicalUrl}' target='_blank'>Read more</a></p>
-        				<img src=${foursquareImg} alt="Powered By foursquare"/>
+        				<img class="foursquare-image"src=${foursquareImg} alt="Powered By foursquare"/>
         				</div>`)
       			})
 			})
@@ -140,6 +158,7 @@ class Map extends Component {
 
 	setMarkerIcon = (marker, iconImg)=>{
 		marker.setIcon(iconImg)
+		this.state.map.panTo(marker.getPosition())
 	}
 
 	setMarkers = (map) =>{
@@ -151,7 +170,7 @@ class Map extends Component {
 				title:location.title
 			})
 			marker.setIcon(markerImg);
-			location.longName = `${location.title} - ${location.type}`
+			location.longName = `${location.title}`
 			location.marker = marker
 			location.visible = true
 			marker.addListener('click', () => {

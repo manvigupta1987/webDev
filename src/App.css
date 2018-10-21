@@ -12,21 +12,18 @@ html, body{
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: darkred;
   padding: 10px 0 10px 0;
-  text-align: center;
   width: 100%;
-  min-height: 70px;
+  height: 60px;
 }
 
 .app-name{
-  font-size: 2.5em;
-  letter-spacing: 2px;
+  font-size: 2.0em;
+  letter-spacing: 1px;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  text-align: center;
+  font-family: sans-serif;
 }
 
 .map-error{
@@ -39,15 +36,15 @@ html, body{
   background: #ccc;
 }
 
-.place-list{
+.place-list {
   position: absolute;
   z-index: 1;
   background: transparent\9;
   box-shadow: 3px 4px 5px #ccc;
-  width: 400px;
+  width: 300px;
 }
 
-.place-item{
+.place-item {
   list-style: none;
   text-align: left;
   font-style: italic;
@@ -70,15 +67,16 @@ html, body{
 
 .suggestionButton{
   width: 100%;
-  padding: 5px;
   text-align: center;
   border: 1px solid #a9a9a9;
   font-size: 1em;
   transition: opacity 0.5s linear;
+  background: teal;
+  font-weight: bold;
 }
 
 .suggestionButton:hover {
-  color: red;
+  color: darkred;
   cursor: pointer;
 }
 
@@ -99,13 +97,26 @@ html, body{
   margin: 0;
   padding: 0;
 }
-@media screen and (max-width: 420px) {
+
+@media screen and (max-width: 620px) {
   .place-list{
-    width: 300px;
+    width: 250px;
   }
   #input-field {
     height: 15px;
     font-size: 1em;
+  }
+  .app-name{
+    font-size: 1.5em;
+  }
+  .marker-info {
+    height: 300px;
+  }
+  .marker-photo{
+    width: 75%;
+  }
+  .foursquare-image{
+    width: 75%;
   }
 }
 
