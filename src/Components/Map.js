@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PlacesList from './PlacesList'
 import foursquareImg from '../images/foursquare.png'
+import selectedMarker from '../images/dinner_selected.png'
+import markerImg from '../images/dinner.png'
 
 class Map extends Component {
 
@@ -135,6 +137,7 @@ class Map extends Component {
 				map,
 				title:location.title
 			})
+			marker.setIcon(markerImg);
 			location.longName = `${location.title} - ${location.type}`
 			location.marker = marker
 			location.visible = true
@@ -161,12 +164,14 @@ class Map extends Component {
 		this.state.infoWindow.open(this.state.map, marker)
 		this.state.infoWindow.setContent(marker.title)
 		this.toggleBounce(marker)
+		marker.setIcon(selectedMarker)
 		this.setState({oldMarker: marker})
 		this.state.map.panTo(marker.getPosition())
 	}
 
 	closeInfoWindow = () => {
 		if(this.state.oldMarker){
+			this.state.oldMarker.setIcon(markerImg)
 			this.toggleBounce(this.state.oldMarker)
 		}
 		this.setState({oldMarker: ''})
