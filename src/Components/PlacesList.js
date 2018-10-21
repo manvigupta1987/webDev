@@ -31,8 +31,8 @@ class PlacesList extends Component {
 		this.setState({query, locations})
 	}
 	render(){
-		const {state} = this.state
-		const placeList = this.state.locations.filter((location) => location.visible).map((location) => (
+		const {query, locations, suggestions} = this.state;
+		const placeList = locations.filter((location) => location.visible).map((location) => (
 			<PlaceItem
 				key={location.placeId}
 				openInfoWindow = {this.props.openInfoWindow}
@@ -43,10 +43,10 @@ class PlacesList extends Component {
 		return(
 			<div className="search">
 				<input type='text' role='search' aria-labelledby='filter' id='search-field'
-				value={this.state.query}
+				value={query}
 				onChange={(event) => (this.filterPlaces(event.target.value))}/>
 				<ul>
-					{this.state.suggestions && placeList}
+					{suggestions && placeList}
 				</ul>
 				<button
 					className="suggestionButton"

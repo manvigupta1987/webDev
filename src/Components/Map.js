@@ -94,8 +94,8 @@ class Map extends Component {
 	}
 
 	getMarkerDetails = (location)=> {
-		const client_secret = 'JJMYQQMQEHR34LYLCBITC3SGUG3SEPRALVZIGYQ1ZFOGJ1YF'
-		const client_id = 'DU1U3LTB3QWRNNYV5D0YTNXANUFPCDZRR3HUUI5PJU1GCV4A'
+		const client_secret = 'YJQZ5FTKIA5UHUDU2BNACLRW14WZBDQLOO0KIWNSBUC2QN4V'
+		const client_id = 'CFSMRM4YK0LMFIZIOO1ETN50A1TXPJENSO3EUOIEBXK3E5ER'
 		const foursquareUrl = `https://api.foursquare.com/v2/venues/${location.placeId}?client_id=${client_id}&client_secret=${client_secret}&v=20181018`
 
 		fetch(foursquareUrl)
@@ -110,6 +110,7 @@ class Map extends Component {
         			console.log(venue)
         			this.state.infoWindow.setContent(`<div class='marker-info'>
         				<h2>${venue.name}</h2>
+        				<h3>${venue.location.address? venue.location.address : venue.location.formattedAddress[0]}</h3>
         				<p><strong><em>Contact Number: </em></strong>${venue.contact.formattedPhone? venue.contact.formattedPhone : "phone number not available"}</p>
         				<p><strong><em>hours: </em></strong>${venue.hours.status}</p>
         				<p>${venue.rating ? '<strong><em>Rating: </em></strong>'+ venue.rating: ''}</p>
@@ -148,6 +149,7 @@ class Map extends Component {
           marker.setAnimation(null);
         } else {
           marker.setAnimation(window.google.maps.Animation.BOUNCE);
+          setTimeout(() => {marker.setAnimation(null);}, 300)
         }
     }
 
