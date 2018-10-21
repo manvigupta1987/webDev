@@ -13,7 +13,7 @@ function App(props) {
       {
         props.loaded? (
           <Map google={props.google} />
-        ) : (<div class="map-error"> Could'nt load google maps </div>)
+        ) : (<div class="map-error"><span className="error-msg"> Could'nt load google maps</span></div>)
       }
       </main>
       </div>
