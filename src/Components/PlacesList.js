@@ -38,6 +38,7 @@ class PlacesList extends Component {
 				openInfoWindow = {this.props.openInfoWindow}
 				location ={location}
 				getMarkerInfo= {this.props.getMarkerInfo}
+				setMarkerIcon={this.props.setMarkerIcon}
 			/>
 		))
 		return(

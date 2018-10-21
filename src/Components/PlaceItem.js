@@ -1,4 +1,6 @@
 import React from 'react'
+import selectedMarker from '../images/dinner_selected.png'
+import markerImg from '../images/dinner.png'
 
 function PlaceItem (props) {
 	return(
@@ -10,7 +12,17 @@ function PlaceItem (props) {
 			onKeyPress={()=>{
 				props.openInfoWindow(props.location.marker)
 				props.getMarkerInfo(props.location)
-			}}>
+			}}
+			onMouseOver={()=>{
+				props.setMarkerIcon(props.location.marker, selectedMarker)
+			}}
+			onFocus={() => {
+				props.setMarkerIcon(props.location.marker, selectedMarker)
+			}}
+			onMouseOut={()=>{
+				props.setMarkerIcon(props.location.marker, markerImg)
+			}}
+			>
 			{props.location.longName}
 		</li>
 	)

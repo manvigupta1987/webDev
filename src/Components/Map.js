@@ -89,6 +89,15 @@ class Map extends Component {
             'lng': -78.81880058823674
           },
           'placeId': '51f824e88bbdcb46a582985c'
+        },
+        {
+          'title': "Zoës Kitchen",
+          'type': "restaurant",
+          'position': {
+            'lat': 35.807550771841974,
+            'lng': -78.81453724529867
+          },
+          'placeId': '51f824e88bbdcb46a582985c'
         }],
         oldMarker: ''
 	}
@@ -116,7 +125,7 @@ class Map extends Component {
         				<img class="marker-photo" src=${venue.bestPhoto ? `${venue.bestPhoto.prefix}300x200${venue.bestPhoto.suffix}` : "no phone found" } alt="restaurant photo">
         				<h3 class="markerInfo">${venue.location.address? venue.location.address : venue.location.formattedAddress[0]}</h3>
         				<p class="markerInfo"><strong>Contact Number: </em></strong>${venue.contact.formattedPhone? venue.contact.formattedPhone : "phone number not available"}</p>
-        				<p class="markerInfo"><strong><em>hours: </em></strong>${venue.hours.status}</p>
+        				<p class="markerInfo"><strong><em>hours: </em></strong>${venue.hours ? venue.hours.status : "hours not available"}</p>
         				<p class="markerInfo">${venue.rating ? '<strong><em>Rating: </em></strong>'+ venue.rating: ''}</p>
         				<p class="markerInfo"><a href='${venue.canonicalUrl}' target='_blank'>Read more</a></p>
         				<img src=${foursquareImg} alt="Powered By foursquare"/>
@@ -127,6 +136,10 @@ class Map extends Component {
 				this.state.infoWindow.setContent("No result found")
 			})
 
+	}
+
+	setMarkerIcon = (marker, iconImg)=>{
+		marker.setIcon(iconImg)
 	}
 
 	setMarkers = (map) =>{
@@ -211,6 +224,7 @@ class Map extends Component {
 					openInfoWindow = {this.openInfoWindow}
 					closeInfoWindow = {this.closeInfoWindow}
 					getMarkerInfo = {this.getMarkerDetails}
+					setMarkerIcon = {this.setMarkerIcon}
 				/>
 				<div id='map' role='application' style={style}></div>
 			</div>
